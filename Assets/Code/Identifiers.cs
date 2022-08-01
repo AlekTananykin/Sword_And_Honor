@@ -6,5 +6,7 @@ namespace Asserts.Code
         public const string Jump = "Jump";
         public const string Attack = "Attack";
         public const string Defend = "Defend";
+
+        public const string PlayerPrefabName = "Knight";
     }
 }

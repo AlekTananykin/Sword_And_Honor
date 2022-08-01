@@ -16,6 +16,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
 
         public void Run(IEcsSystems systems)
         {
+            return;
             foreach (var entity in _units.Value)
             {
                 float attackEffort = Input.GetAxisRaw(Identifiers.Attack);

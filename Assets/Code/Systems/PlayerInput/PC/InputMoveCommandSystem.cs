@@ -19,8 +19,13 @@ namespace Assets.Code.Systems.PlayerInput.PC
             foreach (var entity in _units.Value)
             {
                 var direction = Input.GetAxisRaw(Identifiers.HorizontalAxis);
+
+                if (0 == direction)
+                    continue;
+
                 ref var move = ref _moveCommandPool.Value.Add(entity);
                 move.Effort = direction;
+
             }
         }
     }

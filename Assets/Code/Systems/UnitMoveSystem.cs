@@ -17,10 +17,13 @@ namespace Assets.Code.Systems
             foreach (var entity in _moveUnitFilter.Value)
             {
                 ref var unit = ref _moveUnitFilter.Pools.Inc1.Get(entity);
+
+                //unit is grounded
+
                 ref var command = ref _moveUnitFilter.Pools.Inc2.Get(entity);
 
                 unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(command.Effort, 0));
+                    new Vector2(command.Effort * 5f, 0));
 
                 _moveCommandPool.Value.Del(entity);
             }

@@ -1,3 +1,5 @@
+using Assets.Code.Systems;
+using Assets.Code.Systems.Player;
 using Assets.Code.Systems.PlayerInput.PC;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -22,6 +24,9 @@ namespace Assets.Code
 #if UNITY_EDITOR
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
+                .Add(new PlayerInitSystem())
+                .Add(new UnitMoveSystem())
+                .Add(new UnitJumpSystem())
                 .Inject(_sceneData)
                 .Init();
         }
