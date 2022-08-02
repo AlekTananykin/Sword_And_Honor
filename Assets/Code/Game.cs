@@ -1,4 +1,6 @@
+using Assets.Code.Services;
 using Assets.Code.Systems;
+using Assets.Code.Systems.Animation;
 using Assets.Code.Systems.Player;
 using Assets.Code.Systems.PlayerInput.PC;
 using Leopotam.EcsLite;
@@ -18,16 +20,20 @@ namespace Assets.Code
             var world = new EcsWorld();
             _systems = new EcsSystems(world);
 
+            var timeService = new TimeService();
+            var animationService = new ControlAnimationService();
+
             new PcInputSystemsAdder(_systems);
 
             _systems
+                .Add(new TimeSystem())
 #if UNITY_EDITOR
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
                 .Add(new PlayerInitSystem())
                 .Add(new UnitMoveSystem())
                 .Add(new UnitJumpSystem())
-                .Inject(_sceneData)
+                .Inject(timeService, animationService, _sceneData)
                 .Init();
         }
 
