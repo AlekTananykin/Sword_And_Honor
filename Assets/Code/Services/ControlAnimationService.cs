@@ -1,6 +1,7 @@
 ﻿using Assets.Code.Components;
 using Assets.Code.Configs;
 using Leopotam.EcsLite;
+using Leopotam.EcsLite.Di;
 
 namespace Assets.Code.Systems.Animation
 {
@@ -28,9 +29,11 @@ namespace Assets.Code.Systems.Animation
 
                 animation.Loop = loop;
                 animation.Speed = speed;
-
+                
                 if (track != animation.Trak)
                 {
+                    animation.Sleeps = false;
+
                     ref var unit = ref _units.Get(unitEntity);
 
                     animation.Trak = track;
@@ -49,6 +52,8 @@ namespace Assets.Code.Systems.Animation
                 animation.Trak = track;
                 animation.Sprites = unit.Config.Sequences.Find(
                     sequence => sequence.Track == track).Sprites;
+
+                animation.SpriteRenderer = unit.SpriteRenderer;
 
                 animation.Loop = loop;
                 animation.Speed = speed;

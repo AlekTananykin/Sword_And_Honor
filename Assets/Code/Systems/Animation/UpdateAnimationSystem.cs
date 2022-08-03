@@ -15,6 +15,7 @@ namespace Assets.Code.Systems.Animation
             _unitAnimationFilter = default;
 
         private readonly EcsCustomInject<TimeService> _timeService = default;
+        EcsCustomInject<ControlAnimationService> _animationService = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -22,6 +23,12 @@ namespace Assets.Code.Systems.Animation
             {
                 ref var animationUnit = 
                     ref _unitAnimationPool.Value.Get(animationEntity);
+
+                if (animationUnit.Sleeps)
+                {
+                    _animationService.Value.StartAnimation(
+                        animationEntity, Configs.Track.idle, true, 5.0f);
+                }
 
                 UpdateAnimation(
                     _timeService.Value.DeltaTime, ref animationUnit);
@@ -35,7 +42,9 @@ namespace Assets.Code.Systems.Animation
             float deltaTime, ref UnitAnimationComponent unitAnimation)
         {
             if (unitAnimation.Sleeps)
+            {
                 return;
+            }
 
             unitAnimation.Counter += deltaTime * unitAnimation.Speed;
 

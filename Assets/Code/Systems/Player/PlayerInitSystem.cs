@@ -1,4 +1,5 @@
 ﻿using Asserts.Code;
+using Assets.Code.Configs;
 using Assets.Code.Fabrics;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
@@ -29,7 +30,9 @@ namespace Assets.Code.Systems.Player
             playerUnit.Transform = player.GetComponent<Transform>();
             playerUnit.SpriteRenderer = player.GetComponent<SpriteRenderer>();
 
-            _animationService.Value.StartAnimation(playerEntity, Configs.Track.idle, true, 1.0f);
+            playerUnit.Config = Resources.Load<SpriteAnimationConfig>("Configs/KnightAnimationTracks");
+
+            _animationService.Value.StartAnimation(playerEntity, Configs.Track.idle, true, 5.0f);
         }
     }
 }

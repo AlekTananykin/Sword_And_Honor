@@ -33,6 +33,8 @@ namespace Assets.Code
                 .Add(new PlayerInitSystem())
                 .Add(new UnitMoveSystem())
                 .Add(new UnitJumpSystem())
+
+                .Add(new UpdateAnimationSystem())
                 .Inject(timeService, animationService, _sceneData)
                 .Init();
         }
