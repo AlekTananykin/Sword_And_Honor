@@ -1,29 +1,37 @@
 ﻿using Assets.Code.Components;
 using Assets.Code.Configs;
-using Leopotam.EcsLite.Di;
+using Leopotam.EcsLite;
 
 namespace Assets.Code.Systems.Animation
 {
     sealed class ControlAnimationService
     {
-        private EcsPoolInject<UnitAnimationComponent>
+        private EcsPool<UnitAnimationComponent>
             _unitAnimationPool = default;
 
-        private EcsPoolInject<Unit> _units = default;
+        private EcsPool<Unit> _units = default;
+
+        public ControlAnimationService(IEcsSystems systems)
+        {
+            var world = systems.GetWorld();
+            _unitAnimationPool = world.GetPool<UnitAnimationComponent>();
+            _units = world.GetPool<Unit>();
+        }
 
         internal void StartAnimation(int unitEntity,
             Track track, bool loop, float speed)
         {
-            if (_unitAnimationPool.Value.Has(unitEntity))
+            
+            if (_unitAnimationPool.Has(unitEntity))
             {
-                ref var animation = ref _unitAnimationPool.Value.Get(unitEntity);
+                ref var animation = ref _unitAnimationPool.Get(unitEntity);
 
                 animation.Loop = loop;
                 animation.Speed = speed;
 
                 if (track != animation.Trak)
                 {
-                    ref var unit = ref _units.Value.Get(unitEntity);
+                    ref var unit = ref _units.Get(unitEntity);
 
                     animation.Trak = track;
 
@@ -35,8 +43,8 @@ namespace Assets.Code.Systems.Animation
             }
             else
             {
-                ref var animation = ref _unitAnimationPool.Value.Get(unitEntity);
-                ref var unit = ref _units.Value.Get(unitEntity);
+                ref var animation = ref _unitAnimationPool.Add(unitEntity);
+                ref var unit = ref _units.Get(unitEntity);
 
                 animation.Trak = track;
                 animation.Sprites = unit.Config.Sequences.Find(
@@ -49,10 +57,10 @@ namespace Assets.Code.Systems.Animation
             }
         }
 
-        public  void StopAnimation(int entity)
+        public void StopAnimation(int entity)
         {
-            if (_unitAnimationPool.Value.Has(entity))
-                _unitAnimationPool.Value.Del(entity);
+            if (_unitAnimationPool.Has(entity))
+                _unitAnimationPool.Del(entity);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Assets.Code
             _systems = new EcsSystems(world);
 
             var timeService = new TimeService();
-            var animationService = new ControlAnimationService();
+            var animationService = new ControlAnimationService(_systems);
 
             new PcInputSystemsAdder(_systems);
 

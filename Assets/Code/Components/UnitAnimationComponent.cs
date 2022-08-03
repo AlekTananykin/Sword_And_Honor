@@ -9,7 +9,7 @@ namespace Assets.Code.Components
         public Track Trak;
         public SpriteRenderer SpriteRenderer;
         public List<Sprite> Sprites;
-
+        
         public bool Loop;
         public float Speed;
         public float Counter;

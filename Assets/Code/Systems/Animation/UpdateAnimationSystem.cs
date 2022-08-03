@@ -30,7 +30,7 @@ namespace Assets.Code.Systems.Animation
                     animationUnit.Sprites[(int)animationUnit.Counter];
             }
         }
-
+        
         private void UpdateAnimation(
             float deltaTime, ref UnitAnimationComponent unitAnimation)
         {
@@ -50,5 +50,6 @@ namespace Assets.Code.Systems.Animation
                 unitAnimation.Sleeps = true;
             }
         }
+        
     }
 }
