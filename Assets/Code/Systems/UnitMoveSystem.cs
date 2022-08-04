@@ -13,7 +13,7 @@ namespace Assets.Code.Systems
 
         private EcsPoolInject<MoveCommand> _moveCommandPool = default;
 
-        EcsCustomInject<ControlAnimationService> _animationService = default;
+        private EcsCustomInject<ControlAnimationService> _animationService = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -21,15 +21,16 @@ namespace Assets.Code.Systems
             {
                 ref var unit = ref _moveUnitFilter.Pools.Inc1.Get(entity);
 
-                //unit is grounded
+                if (unit.RigidBody.velocity.magnitude <= unit.Settings.NewStepVelocitySpeed && 
+                    unit.Settings.IsGrounded)
+                {
+                    ref var command = ref _moveUnitFilter.Pools.Inc2.Get(entity);
 
-                ref var command = ref _moveUnitFilter.Pools.Inc2.Get(entity);
+                    unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
+                        new Vector2(command.Effort * unit.Settings.StepSpeed, 0));
 
-                unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
-                    new Vector2(command.Effort * 5f, 0));
-
-                _animationService.Value.StartAnimation(entity, Configs.Track.run, false, 5.0f);
-
+                    _animationService.Value.StartAnimation(entity, Configs.Track.run, true, 5.0f);
+                }
                 _moveCommandPool.Value.Del(entity);
             }
         }

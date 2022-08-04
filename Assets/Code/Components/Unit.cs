@@ -5,7 +5,11 @@ using UnityEngine;
 public struct Unit
 {
     public Transform Transform;
+    public Rigidbody2D RigidBody;
 
-    public SpriteAnimationConfig Config;
     public SpriteRenderer SpriteRenderer;
+
+    public SpriteAnimationConfig AnimationConfig;
+    
+    public UnitSettings Settings;
 }

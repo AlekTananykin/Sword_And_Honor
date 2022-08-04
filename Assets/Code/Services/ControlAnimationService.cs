@@ -38,7 +38,7 @@ namespace Assets.Code.Systems.Animation
 
                     animation.Trak = track;
 
-                    animation.Sprites = unit.Config.Sequences.Find(
+                    animation.Sprites = unit.AnimationConfig.Sequences.Find(
                             sequence => track == sequence.Track).Sprites;
 
                     animation.Counter = 0;
@@ -50,7 +50,7 @@ namespace Assets.Code.Systems.Animation
                 ref var unit = ref _units.Get(unitEntity);
 
                 animation.Trak = track;
-                animation.Sprites = unit.Config.Sequences.Find(
+                animation.Sprites = unit.AnimationConfig.Sequences.Find(
                     sequence => sequence.Track == track).Sprites;
 
                 animation.SpriteRenderer = unit.SpriteRenderer;

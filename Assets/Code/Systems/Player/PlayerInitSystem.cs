@@ -25,14 +25,33 @@ namespace Assets.Code.Systems.Player
             GameObject player = Object.Instantiate(ResourceLoader.Load(
                 Identifiers.PlayerPrefabName));
 
-            player.transform.position = new Vector3(0, 0, 0);
+            playerUnit.Settings = player.GetComponent<UnitSettings>();
+
+            MovingInit(player, ref playerUnit);
+            AnimationInit(player, ref playerUnit);
+
+
+            _animationService.Value.StartAnimation(
+                playerEntity, Configs.Track.idle, true, 5.0f);
+        }
+
+        private void MovingInit(
+            GameObject unitGameObject, ref Unit unitComponent)
+        {
+            unitGameObject.transform.position = new Vector3(0, 0, 0);
+            unitComponent.Transform = unitGameObject.GetComponent<Transform>();
+            unitComponent.RigidBody = unitGameObject.GetComponent<Rigidbody2D>();
+        }
+
+        private void AnimationInit(
+            GameObject unitGameObject, ref Unit unitComponent)
+        {
+            unitComponent.SpriteRenderer = 
+                unitGameObject.GetComponent<SpriteRenderer>();
+            unitComponent.AnimationConfig = 
+                unitComponent.Settings.AnimationConfig;
+
             
-            playerUnit.Transform = player.GetComponent<Transform>();
-            playerUnit.SpriteRenderer = player.GetComponent<SpriteRenderer>();
-
-            playerUnit.Config = Resources.Load<SpriteAnimationConfig>("Configs/KnightAnimationTracks");
-
-            _animationService.Value.StartAnimation(playerEntity, Configs.Track.idle, true, 5.0f);
         }
     }
 }
