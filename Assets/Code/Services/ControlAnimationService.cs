@@ -1,11 +1,10 @@
 ﻿using Assets.Code.Components;
 using Assets.Code.Configs;
 using Leopotam.EcsLite;
-using Leopotam.EcsLite.Di;
 
 namespace Assets.Code.Systems.Animation
 {
-    sealed class ControlAnimationService
+    public sealed class ControlAnimationService
     {
         private EcsPool<UnitAnimationComponent>
             _unitAnimationPool = default;

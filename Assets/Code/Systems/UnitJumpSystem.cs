@@ -6,15 +6,12 @@ using UnityEngine;
 
 namespace Assets.Code.Systems
 {
-    public sealed class UnitJumpSystem : IEcsRunSystem
+    public sealed class UnitJumpSystem : UnitSystemBase, IEcsRunSystem
     {
         private EcsFilterInject<Inc<Unit, JumpCommand>>
             _jumpUnitFilter = default;
 
         private EcsPoolInject<JumpCommand> _jumpCommandPool = default;
-
-        private EcsCustomInject<ControlAnimationService> 
-            _animationService = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -30,7 +27,7 @@ namespace Assets.Code.Systems
                 }
                 _jumpCommandPool.Value.Del(entity);
 
-                _animationService.Value.StartAnimation(
+                _animationService.StartAnimation(
                     entity, Configs.Track.jump, false, 5.0f);
             }
         }

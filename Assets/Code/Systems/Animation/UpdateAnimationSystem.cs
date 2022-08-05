@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Assets.Code.Systems.Animation
 {
-    internal class UpdateAnimationSystem: IEcsRunSystem 
+    internal class UpdateAnimationSystem: IEcsRunSystem, IEcsInitSystem 
     {
         private EcsPoolInject<UnitAnimationComponent> 
             _unitAnimationPool = default;
@@ -15,7 +15,12 @@ namespace Assets.Code.Systems.Animation
             _unitAnimationFilter = default;
 
         private readonly EcsCustomInject<TimeService> _timeService = default;
-        EcsCustomInject<ControlAnimationService> _animationService = default;
+        ControlAnimationService _animationService = default;
+
+        public void Init(IEcsSystems systems)
+        {
+            _animationService = new ControlAnimationService(systems);
+        }
 
         public void Run(IEcsSystems systems)
         {
@@ -26,7 +31,7 @@ namespace Assets.Code.Systems.Animation
 
                 if (animationUnit.Sleeps)
                 {
-                    _animationService.Value.StartAnimation(
+                    _animationService.StartAnimation(
                         animationEntity, Configs.Track.idle, true, 5.0f);
                 }
 
@@ -59,6 +64,6 @@ namespace Assets.Code.Systems.Animation
                 unitAnimation.Sleeps = true;
             }
         }
-        
+
     }
 }

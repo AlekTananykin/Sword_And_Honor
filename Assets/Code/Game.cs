@@ -21,7 +21,6 @@ namespace Assets.Code
             _systems = new EcsSystems(world);
 
             var timeService = new TimeService();
-            var animationService = new ControlAnimationService(_systems);
 
             new PcInputSystemsAdder(_systems);
 
@@ -34,8 +33,10 @@ namespace Assets.Code
                 .Add(new UnitMoveSystem())
                 .Add(new UnitJumpSystem())
 
+                .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
-                .Inject(timeService, animationService, _sceneData)
+                
+                .Inject(timeService, _sceneData)
                 .Init();
         }
 

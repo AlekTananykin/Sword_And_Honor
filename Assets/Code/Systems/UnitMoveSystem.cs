@@ -1,4 +1,5 @@
 ﻿using Assets.Code.Components.Commands;
+using Assets.Code.Services;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -6,14 +7,12 @@ using UnityEngine;
 
 namespace Assets.Code.Systems
 {
-    public sealed class UnitMoveSystem : IEcsRunSystem
+    public sealed class UnitMoveSystem : UnitSystemBase, IEcsRunSystem
     {
         private EcsFilterInject<Inc<Unit, MoveCommand>> 
             _moveUnitFilter = default;
 
         private EcsPoolInject<MoveCommand> _moveCommandPool = default;
-
-        private EcsCustomInject<ControlAnimationService> _animationService = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -29,7 +28,9 @@ namespace Assets.Code.Systems
                     unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
                         new Vector2(command.Effort * unit.Settings.StepSpeed, 0));
 
-                    _animationService.Value.StartAnimation(entity, Configs.Track.run, true, 5.0f);
+                    _renderFlipService.Flip(entity, command.Effort < 0.0f);
+                    _animationService.StartAnimation(entity, Configs.Track.run, true, 5.0f);
+
                 }
                 _moveCommandPool.Value.Del(entity);
             }

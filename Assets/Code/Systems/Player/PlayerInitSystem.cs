@@ -13,7 +13,7 @@ namespace Assets.Code.Systems.Player
         EcsPoolInject<Unit> _units = default;
         EcsPoolInject<ControlledByPlayer> _isControllerByPlayer = default;
                 
-        EcsCustomInject<ControlAnimationService> _animationService = default;
+        ControlAnimationService _animationService = default;
 
         public void Init(IEcsSystems systems)
         {
@@ -30,8 +30,9 @@ namespace Assets.Code.Systems.Player
             MovingInit(player, ref playerUnit);
             AnimationInit(player, ref playerUnit);
 
+            _animationService = new ControlAnimationService(systems);
 
-            _animationService.Value.StartAnimation(
+            _animationService.StartAnimation(
                 playerEntity, Configs.Track.idle, true, 5.0f);
         }
 
