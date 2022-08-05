@@ -2,14 +2,17 @@
 using Assets.Code.Configs;
 using UnityEngine;
 
-public struct Unit
+namespace Assets.Code.Components
 {
-    public Transform Transform;
-    public Rigidbody2D RigidBody;
+    public struct Unit
+    {
+        public Transform Transform;
+        public Rigidbody2D RigidBody;
 
-    public SpriteRenderer SpriteRenderer;
+        public SpriteRenderer SpriteRenderer;
 
-    public SpriteAnimationConfig AnimationConfig;
-    
-    public UnitSettings Settings;
+        public SpriteAnimationConfig AnimationConfig;
+
+        public UnitSettings Settings;
+    }
 }

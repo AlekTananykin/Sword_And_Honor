@@ -5,7 +5,7 @@ namespace Asserts.Code
         public const string HorizontalAxis = "Horizontal";
         public const string Jump = "Jump";
         public const string Attack = "Attack";
-        public const string Defend = "Defend";
+        public const string Idle = "Idle";
 
         public const string PlayerPrefabName = "Knight";
     }

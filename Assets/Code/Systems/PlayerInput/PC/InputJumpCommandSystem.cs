@@ -1,4 +1,5 @@
 ﻿using Asserts.Code;
+using Assets.Code.Components;
 using Assets.Code.Components.Commands;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;

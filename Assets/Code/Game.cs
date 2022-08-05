@@ -32,6 +32,8 @@ namespace Assets.Code
                 .Add(new PlayerInitSystem())
                 .Add(new UnitMoveSystem())
                 .Add(new UnitJumpSystem())
+                .Add(new UnitAttackSystem())
+                .Add(new UnitStopMoveSystem())
 
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())

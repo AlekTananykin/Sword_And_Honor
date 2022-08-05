@@ -1,6 +1,5 @@
-﻿using Assets.Code.Components.Commands;
-using Assets.Code.Services;
-using Assets.Code.Systems.Animation;
+﻿using Assets.Code.Components;
+using Assets.Code.Components.Commands;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;

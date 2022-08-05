@@ -8,7 +8,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
         {
             systems
                 .Add(new InputAttackCommandSystem())
-                .Add(new InputDefendCommandSystem())
+                .Add(new InputStopMoveCommandSystem())
                 .Add(new InputJumpCommandSystem())
                 .Add(new InputMoveCommandSystem())
                 ;

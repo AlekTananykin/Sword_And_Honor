@@ -1,4 +1,5 @@
 ﻿using Asserts.Code;
+using Assets.Code.Components;
 using Assets.Code.Configs;
 using Assets.Code.Fabrics;
 using Assets.Code.Systems.Animation;

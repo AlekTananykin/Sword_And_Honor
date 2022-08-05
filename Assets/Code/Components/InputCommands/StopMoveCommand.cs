@@ -1,7 +1,7 @@
 ﻿
 namespace Assets.Code.Components.Commands
 {
-    public struct DefendCommand
+    public struct StopMoveCommand
     {
     }
 }
