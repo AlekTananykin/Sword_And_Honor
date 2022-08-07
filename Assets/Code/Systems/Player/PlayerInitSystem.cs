@@ -30,6 +30,7 @@ namespace Assets.Code.Systems.Player
 
             MovingInit(player, ref playerUnit);
             AnimationInit(player, ref playerUnit);
+            SoundInit(player, ref playerUnit);
 
             _animationService = new ControlAnimationService(systems);
 
@@ -52,8 +53,16 @@ namespace Assets.Code.Systems.Player
                 unitGameObject.GetComponent<SpriteRenderer>();
             unitComponent.AnimationConfig = 
                 unitComponent.Settings.AnimationConfig;
+        }
 
-            
+        private void SoundInit(GameObject unitGameObject, ref Unit unitComponent)
+        {
+            unitComponent.AudioPlayer =
+                unitGameObject.GetComponent<AudioSource>();
+
+            unitComponent.SoundConfig =
+               unitComponent.Settings.AudioConfig;
+
         }
     }
 }

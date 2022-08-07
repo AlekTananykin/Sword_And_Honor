@@ -1,6 +1,11 @@
 using Assets.Code.Configs;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class UnitSettings : MonoBehaviour
 {
     [Header("Moving")]
@@ -11,6 +16,8 @@ public class UnitSettings : MonoBehaviour
     [Header("Animation")]
     public SpriteAnimationConfig AnimationConfig = default;
 
+    [Header("Audio")]
+    public SoundPlayConfig AudioConfig = default;
 
     public bool IsGrounded { get; private set; }
 

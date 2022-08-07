@@ -13,8 +13,6 @@ namespace Assets.Code.Systems
            _idleUnitFilter = default;
 
         private EcsPoolInject<StopMoveCommand> _idleCommandPool = default;
-        private EcsPoolInject<UnitAnimationComponent> 
-            _unitAnimationPool = default;
 
         public void Run(IEcsSystems systems)
         {
