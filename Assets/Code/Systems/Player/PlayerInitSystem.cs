@@ -1,6 +1,5 @@
 ﻿using Asserts.Code;
 using Assets.Code.Components;
-using Assets.Code.Configs;
 using Assets.Code.Fabrics;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
@@ -11,7 +10,10 @@ namespace Assets.Code.Systems.Player
 {
     public sealed class PlayerInitSystem : IEcsInitSystem
     {
-        EcsPoolInject<Unit> _units = default;
+        EcsPoolInject<Unit> _unitPool = default;
+        EcsPoolInject<UnitAnimationComponent> _unitAnimationPool = default;
+        EcsPoolInject<UnitSoundComponent> _unitSoundComponent = default;
+
         EcsPoolInject<ControlledByPlayer> _isControllerByPlayer = default;
                 
         ControlAnimationService _animationService = default;
@@ -20,17 +22,16 @@ namespace Assets.Code.Systems.Player
         {
             var playerEntity = systems.GetWorld().NewEntity();
 
-            ref var playerUnit = ref _units.Value.Add(playerEntity);
             _isControllerByPlayer.Value.Add(playerEntity);
 
             GameObject player = Object.Instantiate(ResourceLoader.Load(
                 Identifiers.PlayerPrefabName));
 
-            playerUnit.Settings = player.GetComponent<UnitSettings>();
+            UnitSettings settings = player.GetComponent<UnitSettings>();
 
-            MovingInit(player, ref playerUnit);
-            AnimationInit(player, ref playerUnit);
-            SoundInit(player, ref playerUnit);
+            MovingInit(player, settings, playerEntity);
+            AnimationInit(player, settings, playerEntity);
+            SoundInit(player, settings, playerEntity);
 
             _animationService = new ControlAnimationService(systems);
 
@@ -39,30 +40,36 @@ namespace Assets.Code.Systems.Player
         }
 
         private void MovingInit(
-            GameObject unitGameObject, ref Unit unitComponent)
+            GameObject unitGameObject, UnitSettings settings, int unitEntity)
         {
+            ref var playerUnit = ref _unitPool.Value.Add(unitEntity);
+
+            playerUnit.Settings = settings;
+
             unitGameObject.transform.position = new Vector3(0, 0, 0);
-            unitComponent.Transform = unitGameObject.GetComponent<Transform>();
-            unitComponent.RigidBody = unitGameObject.GetComponent<Rigidbody2D>();
+            playerUnit.Transform = unitGameObject.GetComponent<Transform>();
+            playerUnit.RigidBody = unitGameObject.GetComponent<Rigidbody2D>();
         }
 
         private void AnimationInit(
-            GameObject unitGameObject, ref Unit unitComponent)
+            GameObject unitGameObject, UnitSettings settings, int unitEntity)
         {
-            unitComponent.SpriteRenderer = 
+            ref var unitAnimation = ref _unitAnimationPool.Value.Add(unitEntity);
+
+            unitAnimation.SpriteRenderer = 
                 unitGameObject.GetComponent<SpriteRenderer>();
-            unitComponent.AnimationConfig = 
-                unitComponent.Settings.AnimationConfig;
+
+            unitAnimation.AnimationConfig = settings.AnimationConfig;
         }
 
-        private void SoundInit(GameObject unitGameObject, ref Unit unitComponent)
+        private void SoundInit(GameObject unitGameObject, UnitSettings settings, int unitEntity)
         {
-            unitComponent.AudioPlayer =
+
+            ref var unitSound = ref _unitSoundComponent.Value.Add(unitEntity);
+            unitSound.AudioPlayer =
                 unitGameObject.GetComponent<AudioSource>();
 
-            unitComponent.SoundConfig =
-               unitComponent.Settings.AudioConfig;
-
+            unitSound.SoundConfig = settings.AudioConfig;
         }
     }
 }

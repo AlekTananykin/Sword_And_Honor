@@ -9,12 +9,6 @@ namespace Assets.Code.Components
         public Transform Transform;
         public Rigidbody2D RigidBody;
 
-        public SpriteRenderer SpriteRenderer;
-        public SpriteAnimationConfig AnimationConfig;
-
-        public AudioSource AudioPlayer;
-        public SoundPlayConfig SoundConfig;
-
         public UnitSettings Settings;
     }
 }

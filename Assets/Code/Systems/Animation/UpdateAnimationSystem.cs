@@ -8,11 +8,11 @@ namespace Assets.Code.Systems.Animation
 {
     internal class UpdateAnimationSystem: IEcsRunSystem, IEcsInitSystem 
     {
-        private EcsPoolInject<UnitAnimationComponent> 
-            _unitAnimationPool = default;
+        private EcsPoolInject<AnimationTaskComponent> 
+            _animationTaskPool = default;
 
-        private EcsFilterInject<Inc<UnitAnimationComponent>> 
-            _unitAnimationFilter = default;
+        private EcsFilterInject<Inc<AnimationTaskComponent>> 
+            _animationTaskFilterFilter = default;
 
         private readonly EcsCustomInject<TimeService> _timeService = default;
         ControlAnimationService _animationService = default;
@@ -24,10 +24,10 @@ namespace Assets.Code.Systems.Animation
 
         public void Run(IEcsSystems systems)
         {
-            foreach (var animationEntity in _unitAnimationFilter.Value)
+            foreach (var animationEntity in _animationTaskFilterFilter.Value)
             {
                 ref var animationUnit = 
-                    ref _unitAnimationPool.Value.Get(animationEntity);
+                    ref _animationTaskPool.Value.Get(animationEntity);
 
                 if (animationUnit.Sleeps)
                 {
@@ -44,7 +44,7 @@ namespace Assets.Code.Systems.Animation
         }
         
         private void UpdateAnimation(
-            float deltaTime, ref UnitAnimationComponent unitAnimation)
+            float deltaTime, ref AnimationTaskComponent unitAnimation)
         {
             if (unitAnimation.Sleeps)
             {

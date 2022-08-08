@@ -9,10 +9,10 @@ namespace Assets.Code.Systems.Animation
         private EcsPoolInject<FlipRendererComponent> 
             _flipRenderedPool = default;
 
-        private EcsPoolInject<UnitAnimationComponent> 
-            _unitAnimationPool = default;
+        private EcsPoolInject<AnimationTaskComponent> 
+            _animationTaskPool = default;
 
-        private EcsFilterInject<Inc<FlipRendererComponent, UnitAnimationComponent>>
+        private EcsFilterInject<Inc<FlipRendererComponent, AnimationTaskComponent>>
             _flipFilter = default;
 
         public void Run(IEcsSystems systems)
@@ -21,7 +21,7 @@ namespace Assets.Code.Systems.Animation
             {
                 ref var flip = 
                     ref _flipRenderedPool.Value.Get(entity);
-                ref var unitAnimation = ref _unitAnimationPool.Value.Get(entity);
+                ref var unitAnimation = ref _animationTaskPool.Value.Get(entity);
 
                 unitAnimation.SpriteRenderer.flipX = flip.FlipX;
 

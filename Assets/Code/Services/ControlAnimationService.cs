@@ -6,25 +6,25 @@ namespace Assets.Code.Systems.Animation
 {
     public sealed class ControlAnimationService
     {
-        private EcsPool<UnitAnimationComponent>
-            _unitAnimationPool = default;
+        private EcsPool<AnimationTaskComponent>
+            _animationTaskPool = default;
 
-        private EcsPool<Unit> _units = default;
+        private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
 
         public ControlAnimationService(IEcsSystems systems)
         {
             var world = systems.GetWorld();
+            _animationTaskPool = world.GetPool<AnimationTaskComponent>();
             _unitAnimationPool = world.GetPool<UnitAnimationComponent>();
-            _units = world.GetPool<Unit>();
         }
 
         internal void StartAnimation(int unitEntity,
             Track track, bool loop, float speed)
         {
             
-            if (_unitAnimationPool.Has(unitEntity))
+            if (_animationTaskPool.Has(unitEntity))
             {
-                ref var animation = ref _unitAnimationPool.Get(unitEntity);
+                ref var animation = ref _animationTaskPool.Get(unitEntity);
 
                 animation.Loop = loop;
                 animation.Speed = speed;
@@ -33,7 +33,7 @@ namespace Assets.Code.Systems.Animation
                 {
                     animation.Sleeps = false;
 
-                    ref var unit = ref _units.Get(unitEntity);
+                    ref var unit = ref _unitAnimationPool.Get(unitEntity);
 
                     animation.Trak = track;
 
@@ -45,8 +45,8 @@ namespace Assets.Code.Systems.Animation
             }
             else
             {
-                ref var animation = ref _unitAnimationPool.Add(unitEntity);
-                ref var unit = ref _units.Get(unitEntity);
+                ref var animation = ref _animationTaskPool.Add(unitEntity);
+                ref var unit = ref _unitAnimationPool.Get(unitEntity);
 
                 animation.Trak = track;
                 animation.Sprites = unit.AnimationConfig.Sequences.Find(
@@ -63,8 +63,8 @@ namespace Assets.Code.Systems.Animation
 
         public void StopAnimation(int entity)
         {
-            if (_unitAnimationPool.Has(entity))
-                _unitAnimationPool.Del(entity);
+            if (_animationTaskPool.Has(entity))
+                _animationTaskPool.Del(entity);
         }
     }
 }
