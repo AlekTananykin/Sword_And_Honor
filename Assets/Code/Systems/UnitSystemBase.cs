@@ -10,9 +10,11 @@ namespace Assets.Code.Systems
         {
             _renderFlipService = new RendererFlipService(systems);
             _animationService = new ControlAnimationService(systems);
+            _soundService = new ControlSoundService(systems);
         }
 
         protected RendererFlipService _renderFlipService = default;
         protected ControlAnimationService _animationService = default;
+        protected ControlSoundService _soundService = default;
     }
 }

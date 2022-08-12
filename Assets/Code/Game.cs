@@ -37,6 +37,7 @@ namespace Assets.Code
 
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
+                .Add(new PlaySoundSystem())
                 
                 .Inject(timeService, _sceneData)
                 .Init();

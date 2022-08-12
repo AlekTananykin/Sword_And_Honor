@@ -8,5 +8,7 @@ namespace Asserts.Code
         public const string Idle = "Idle";
 
         public const string PlayerPrefabName = "Knight";
+
+        public const float UnitAnimationSpeed = 5.0f;
     }
 }

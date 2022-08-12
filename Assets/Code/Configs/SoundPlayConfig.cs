@@ -1,30 +1,33 @@
-using Assets.Code.Configs;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+public enum SoundTrack
+{
+    idle,
+    walk,
+    run,
+    jump,
+    fall,
+    attack1,
+    attack2,
+    attack3,
+    block,
+    hurt,
+    death
+}
 
 [CreateAssetMenu(fileName = "SoundPlayConfig", 
     menuName = "Configs/SoundPlayConfig")]
 public sealed class SoundPlayConfig : ScriptableObject
 {
     [Serializable]
-    private sealed class AudioSequence
+    public sealed class AudioSequence
     {
-        public Track Track;
+        public SoundTrack Track;
         public AudioClip Clip;
     }
 
     [SerializeField]
-    private List<AudioSequence> _sequences = new List<AudioSequence>();
-
-    public SoundPlayConfig()
-    {
-        foreach (var audio in _sequences)
-        {
-            Clips.Add(audio.Track, audio.Clip);
-        }
-    }
-
-    public Dictionary<Track, AudioClip> Clips = 
-        new Dictionary<Track, AudioClip>();
+    public List<AudioSequence> SoundSequences = new List<AudioSequence>();
 }

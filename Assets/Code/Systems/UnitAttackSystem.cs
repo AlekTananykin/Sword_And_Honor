@@ -16,9 +16,14 @@ namespace Assets.Code.Systems
         {
             foreach (var entity in _attackUnitFilter.Value)
             {
-                _animationService.StartAnimation(entity, Configs.Track.attack1, false, 5.0f);
+                _animationService.StartAnimation(entity, Configs.Track.attack1, _isLoop, 
+                    Asserts.Code.Identifiers.UnitAnimationSpeed);
+
+                _soundService.PlaySound(entity, SoundTrack.attack1, _isLoop);
                 _attackCommandPool.Value.Del(entity);
             }
         }
+
+        private const bool _isLoop = false;
     }
 }

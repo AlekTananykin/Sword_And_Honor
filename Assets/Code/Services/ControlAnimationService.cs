@@ -6,11 +6,6 @@ namespace Assets.Code.Systems.Animation
 {
     public sealed class ControlAnimationService
     {
-        private EcsPool<AnimationTaskComponent>
-            _animationTaskPool = default;
-
-        private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
-
         public ControlAnimationService(IEcsSystems systems)
         {
             var world = systems.GetWorld();
@@ -19,14 +14,14 @@ namespace Assets.Code.Systems.Animation
         }
 
         internal void StartAnimation(int unitEntity,
-            Track track, bool loop, float speed)
+            Track track, bool isLoop, float speed)
         {
             
             if (_animationTaskPool.Has(unitEntity))
             {
                 ref var animation = ref _animationTaskPool.Get(unitEntity);
 
-                animation.Loop = loop;
+                animation.Loop = isLoop;
                 animation.Speed = speed;
                 
                 if (track != animation.Trak)
@@ -54,7 +49,7 @@ namespace Assets.Code.Systems.Animation
 
                 animation.SpriteRenderer = unit.SpriteRenderer;
 
-                animation.Loop = loop;
+                animation.Loop = isLoop;
                 animation.Speed = speed;
                 animation.Counter = 0;
                 animation.Sleeps = false;
@@ -66,5 +61,10 @@ namespace Assets.Code.Systems.Animation
             if (_animationTaskPool.Has(entity))
                 _animationTaskPool.Del(entity);
         }
+
+        private EcsPool<AnimationTaskComponent>
+            _animationTaskPool = default;
+
+        private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
     }
 }

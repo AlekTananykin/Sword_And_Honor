@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44b87d13ed97c0847b53d22fdea919c9, type: 3}
   m_Name: KnightSoundConfig
   m_EditorClassIdentifier: 
-  _sequences:
-  - Track: 1
-    Clip: {fileID: 0}
+  SoundSequences:
+  - Track: 5
+    Clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
