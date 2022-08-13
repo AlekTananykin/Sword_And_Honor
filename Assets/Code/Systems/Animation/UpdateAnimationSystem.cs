@@ -19,7 +19,8 @@ namespace Assets.Code.Systems.Animation
 
         public void Init(IEcsSystems systems)
         {
-            _animationService = new ControlAnimationService(systems);
+            var soundService = new ControlSoundService(systems);
+            _animationService = new ControlAnimationService(systems, soundService);
         }
 
         public void Run(IEcsSystems systems)
@@ -32,7 +33,7 @@ namespace Assets.Code.Systems.Animation
                 if (animationUnit.Sleeps)
                 {
                     _animationService.StartAnimation(
-                        animationEntity, Configs.Track.idle, true, 5.0f);
+                        animationEntity, Configs.AnimationTrack.idle, true, 5.0f);
                 }
 
                 UpdateAnimation(

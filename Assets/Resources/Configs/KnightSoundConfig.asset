@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: KnightSoundConfig
   m_EditorClassIdentifier: 
   SoundSequences:
-  - Track: 5
+  - Track: 6
     Clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}

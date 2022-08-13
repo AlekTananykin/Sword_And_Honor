@@ -6,7 +6,7 @@ namespace Assets.Code.Components
 {
     public struct AnimationTaskComponent
     {
-        public Track Trak;
+        public AnimationTrack Trak;
         public SpriteRenderer SpriteRenderer;
         public List<Sprite> Sprites;
         

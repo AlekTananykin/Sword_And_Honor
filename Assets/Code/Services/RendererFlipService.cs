@@ -12,7 +12,6 @@ namespace Assets.Code.Services
                 systems.GetWorld().GetPool<FlipRendererComponent>();
         }
 
-
         public void Flip(int entity, bool flipX)
         {
             ref var flipComponent = ref _FlipRendererComponent.Add(entity);

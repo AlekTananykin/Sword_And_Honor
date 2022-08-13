@@ -19,7 +19,7 @@ namespace Assets.Code.Systems
             foreach (var entity in _idleUnitFilter.Value)
             {
                 _animationService.StartAnimation(
-                    entity, Configs.Track.idle, true, 5.0f);
+                    entity, Configs.AnimationTrack.idle, true, 5.0f);
 
                 _idleCommandPool.Value.Del(entity);
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Code.Configs
 {
-    public enum Track
+    public enum AnimationTrack
     {
         idle,
         walk,
@@ -24,12 +24,17 @@ namespace Assets.Code.Configs
     public sealed  class SpriteAnimationConfig: ScriptableObject
     {
         [Serializable]
-        public sealed class SpriteSequence
+        public sealed class AnimationContext
         {
-            public Track Track;
+            public AnimationTrack Track;
             public List<Sprite> Sprites = new List<Sprite>();
+
+            public SoundTrack BeginAnimationSound;
+            public bool IsLoopBeginAnimationSound;
+
+            public SoundTrack EndAnimationSound;
         }
 
-        public List<SpriteSequence> Sequences = new List<SpriteSequence>();
+        public List<AnimationContext> Sequences = new List<AnimationContext>();
     }
 }

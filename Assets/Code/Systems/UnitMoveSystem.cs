@@ -28,7 +28,7 @@ namespace Assets.Code.Systems
                         new Vector2(command.Effort * unit.Settings.StepSpeed, 0));
 
                     _renderFlipService.Flip(entity, command.Effort < 0.0f);
-                    _animationService.StartAnimation(entity, Configs.Track.run, true, 5.0f);
+                    _animationService.StartAnimation(entity, Configs.AnimationTrack.run, true, 5.0f);
 
                 }
                 _moveCommandPool.Value.Del(entity);

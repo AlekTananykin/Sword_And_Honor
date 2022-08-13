@@ -17,6 +17,7 @@ namespace Assets.Code.Systems.Player
         EcsPoolInject<ControlledByPlayer> _isControllerByPlayer = default;
                 
         ControlAnimationService _animationService = default;
+        ControlSoundService _soundService = default;
 
         public void Init(IEcsSystems systems)
         {
@@ -33,10 +34,11 @@ namespace Assets.Code.Systems.Player
             AnimationInit(player, settings, playerEntity);
             SoundInit(player, settings, playerEntity);
 
-            _animationService = new ControlAnimationService(systems);
+            _soundService = new ControlSoundService(systems);
+            _animationService = new ControlAnimationService(systems, _soundService);
 
             _animationService.StartAnimation(
-                playerEntity, Configs.Track.idle, true, 5.0f);
+                playerEntity, Configs.AnimationTrack.idle, true, 5.0f);
         }
 
         private void MovingInit(

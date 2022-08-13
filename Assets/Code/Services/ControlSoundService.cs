@@ -1,9 +1,10 @@
 using Assets.Code.Components;
+using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class ControlSoundService
+public sealed class ControlSoundService: IControlSoundService
 {
     public ControlSoundService(IEcsSystems systems)
     {
@@ -14,6 +15,9 @@ public sealed class ControlSoundService
 
     public void PlaySound(int unitEntity, SoundTrack track, bool isLoop)
     {
+        if (SoundTrack.noSound == track)
+            return;
+
         ref SoundQueueComponent soundQueue = ref GetSoundQueue(unitEntity);
 
         ref var unitSound = ref _unitSoundPool.Get(unitEntity);
@@ -34,16 +38,16 @@ public sealed class ControlSoundService
         });
     }
 
-    AudioClip GetClip(SoundPlayConfig config, SoundTrack track)
-    {
-        return config.SoundSequences.Find(
-              sequence => track == sequence.Track)?.Clip;
-    }
-
     public void StopSound(int unitEntity)
     {
         ref var unitSound = ref _unitSoundPool.Get(unitEntity);
         unitSound.AudioPlayer.Stop();
+    }
+
+    private AudioClip GetClip(SoundPlayConfig config, SoundTrack track)
+    {
+        return config.SoundSequences.Find(
+              sequence => track == sequence.Track)?.Clip;
     }
 
     private ref SoundQueueComponent GetSoundQueue(int unitEntity)

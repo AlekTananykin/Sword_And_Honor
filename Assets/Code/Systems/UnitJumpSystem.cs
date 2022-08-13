@@ -28,7 +28,7 @@ namespace Assets.Code.Systems
                 _jumpCommandPool.Value.Del(entity);
 
                 _animationService.StartAnimation(
-                    entity, Configs.Track.jump, false, 5.0f);
+                    entity, Configs.AnimationTrack.jump, false, 5.0f);
             }
         }
     }

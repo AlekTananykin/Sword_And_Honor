@@ -9,8 +9,9 @@ namespace Assets.Code.Systems
         public void Init(IEcsSystems systems)
         {
             _renderFlipService = new RendererFlipService(systems);
-            _animationService = new ControlAnimationService(systems);
+
             _soundService = new ControlSoundService(systems);
+            _animationService = new ControlAnimationService(systems, _soundService);
         }
 
         protected RendererFlipService _renderFlipService = default;

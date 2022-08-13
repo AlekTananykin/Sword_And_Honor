@@ -16,10 +16,9 @@ namespace Assets.Code.Systems
         {
             foreach (var entity in _attackUnitFilter.Value)
             {
-                _animationService.StartAnimation(entity, Configs.Track.attack1, _isLoop, 
+                _animationService.StartAnimation(entity, Configs.AnimationTrack.attack1, _isLoop, 
                     Asserts.Code.Identifiers.UnitAnimationSpeed);
 
-                _soundService.PlaySound(entity, SoundTrack.attack1, _isLoop);
                 _attackCommandPool.Value.Del(entity);
             }
         }

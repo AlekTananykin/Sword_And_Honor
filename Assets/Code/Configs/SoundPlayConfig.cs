@@ -4,6 +4,7 @@ using UnityEngine;
 
 public enum SoundTrack
 {
+    noSound,
     idle,
     walk,
     run,

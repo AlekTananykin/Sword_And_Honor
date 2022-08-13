@@ -1,22 +1,26 @@
 ﻿using Assets.Code.Components;
 using Assets.Code.Configs;
+using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
+using static Assets.Code.Configs.SpriteAnimationConfig;
 
 namespace Assets.Code.Systems.Animation
 {
     public sealed class ControlAnimationService
     {
-        public ControlAnimationService(IEcsSystems systems)
+        public ControlAnimationService(IEcsSystems systems, 
+            IControlSoundService soundService)
         {
             var world = systems.GetWorld();
             _animationTaskPool = world.GetPool<AnimationTaskComponent>();
             _unitAnimationPool = world.GetPool<UnitAnimationComponent>();
+
+            _soundService = soundService;
         }
 
         internal void StartAnimation(int unitEntity,
-            Track track, bool isLoop, float speed)
+            AnimationTrack track, bool isLoop, float speed)
         {
-            
             if (_animationTaskPool.Has(unitEntity))
             {
                 ref var animation = ref _animationTaskPool.Get(unitEntity);
@@ -27,15 +31,19 @@ namespace Assets.Code.Systems.Animation
                 if (track != animation.Trak)
                 {
                     animation.Sleeps = false;
-
+                    _soundService.StopSound(unitEntity);
+                    
                     ref var unit = ref _unitAnimationPool.Get(unitEntity);
 
                     animation.Trak = track;
 
-                    animation.Sprites = unit.AnimationConfig.Sequences.Find(
-                            sequence => track == sequence.Track).Sprites;
+                    var animationContext = GetAnimationContext(ref unit, track);
 
+                    animation.Sprites = animationContext.Sprites;
                     animation.Counter = 0;
+
+                    _soundService.PlaySound(unitEntity, animationContext.BeginAnimationSound, 
+                        animationContext.IsLoopBeginAnimationSound);
                 }
             }
             else
@@ -44,8 +52,10 @@ namespace Assets.Code.Systems.Animation
                 ref var unit = ref _unitAnimationPool.Get(unitEntity);
 
                 animation.Trak = track;
-                animation.Sprites = unit.AnimationConfig.Sequences.Find(
-                    sequence => sequence.Track == track).Sprites;
+
+                var animationContext = GetAnimationContext(ref unit, track);
+
+                animation.Sprites = animationContext.Sprites;
 
                 animation.SpriteRenderer = unit.SpriteRenderer;
 
@@ -54,6 +64,13 @@ namespace Assets.Code.Systems.Animation
                 animation.Counter = 0;
                 animation.Sleeps = false;
             }
+        }
+
+        AnimationContext GetAnimationContext(ref UnitAnimationComponent animationComponent, 
+            AnimationTrack track)
+        {
+            return animationComponent.AnimationConfig.Sequences.Find(
+                    sequence => sequence.Track == track);
         }
 
         public void StopAnimation(int entity)
@@ -66,5 +83,7 @@ namespace Assets.Code.Systems.Animation
             _animationTaskPool = default;
 
         private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
+
+        private IControlSoundService _soundService;
     }
 }
