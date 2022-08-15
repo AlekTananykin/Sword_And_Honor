@@ -10,14 +10,15 @@ namespace Assets.Code.Systems.Player
 {
     public sealed class PlayerInitSystem : IEcsInitSystem
     {
-        EcsPoolInject<Unit> _unitPool = default;
+        EcsPoolInject<UnitComponent> _unitPool = default;
         EcsPoolInject<UnitAnimationComponent> _unitAnimationPool = default;
-        EcsPoolInject<UnitSoundComponent> _unitSoundComponent = default;
+        EcsPoolInject<UnitSoundComponent> _unitSoundPool = default;
+        EcsPoolInject<AttackComponent> _attackPool = default;
+        EcsPoolInject<HealthComponent> _healthPool = default;
 
-        EcsPoolInject<ControlledByPlayer> _isControllerByPlayer = default;
+        EcsPoolInject<IsControlledByPlayerComponent> _isControllerByPlayer = default;
                 
-        ControlAnimationService _animationService = default;
-        ControlSoundService _soundService = default;
+        EcsCustomInject<ControlAnimationService> _animationService = default;
 
         public void Init(IEcsSystems systems)
         {
@@ -28,25 +29,24 @@ namespace Assets.Code.Systems.Player
             GameObject player = Object.Instantiate(ResourceLoader.Load(
                 Identifiers.PlayerPrefabName));
 
-            UnitSettings settings = player.GetComponent<UnitSettings>();
+            UnitAvatar unitAvatar = player.GetComponent<UnitAvatar>();
 
-            MovingInit(player, settings, playerEntity);
-            AnimationInit(player, settings, playerEntity);
-            SoundInit(player, settings, playerEntity);
+            MovingInit(player, unitAvatar, playerEntity);
+            AnimationInit(player, unitAvatar, playerEntity);
+            SoundInit(player, unitAvatar, playerEntity);
+            AttackFacilitiesInit(player, unitAvatar, playerEntity);
+            HealthInit(unitAvatar, playerEntity);
 
-            _soundService = new ControlSoundService(systems);
-            _animationService = new ControlAnimationService(systems, _soundService);
-
-            _animationService.StartAnimation(
+            _animationService.Value.StartAnimation(
                 playerEntity, Configs.AnimationTrack.idle, true, 5.0f);
         }
 
         private void MovingInit(
-            GameObject unitGameObject, UnitSettings settings, int unitEntity)
+            GameObject unitGameObject, UnitAvatar settings, int unitEntity)
         {
             ref var playerUnit = ref _unitPool.Value.Add(unitEntity);
 
-            playerUnit.Settings = settings;
+            playerUnit.Avatar = settings;
 
             unitGameObject.transform.position = new Vector3(0, 0, 0);
             playerUnit.Transform = unitGameObject.GetComponent<Transform>();
@@ -54,7 +54,7 @@ namespace Assets.Code.Systems.Player
         }
 
         private void AnimationInit(
-            GameObject unitGameObject, UnitSettings settings, int unitEntity)
+            GameObject unitGameObject, UnitAvatar settings, int unitEntity)
         {
             ref var unitAnimation = ref _unitAnimationPool.Value.Add(unitEntity);
 
@@ -64,14 +64,28 @@ namespace Assets.Code.Systems.Player
             unitAnimation.AnimationConfig = settings.AnimationConfig;
         }
 
-        private void SoundInit(GameObject unitGameObject, UnitSettings settings, int unitEntity)
+        private void SoundInit(GameObject unitGameObject, UnitAvatar settings, int unitEntity)
         {
-
-            ref var unitSound = ref _unitSoundComponent.Value.Add(unitEntity);
+            ref var unitSound = ref _unitSoundPool.Value.Add(unitEntity);
             unitSound.AudioPlayer =
                 unitGameObject.GetComponent<AudioSource>();
 
             unitSound.SoundConfig = settings.AudioConfig;
+        }
+
+        private void AttackFacilitiesInit(
+            GameObject unitGameObject, UnitAvatar settings, int unitEntity)
+        {
+            ref var unitAtack = ref _attackPool.Value.Add(unitEntity);
+
+            unitAtack.Attak =
+                unitGameObject.GetComponent<UnitAttack>();
+        }
+
+        private void HealthInit(UnitAvatar avatart, int unitEntity)
+        {
+            ref var unitHealth = ref _healthPool.Value.Add(unitEntity);
+            unitHealth.Health = avatart.Health;
         }
     }
 }

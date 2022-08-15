@@ -9,7 +9,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
 {
     public sealed class InputMoveCommandSystem : IEcsRunSystem
     {
-        readonly private EcsFilterInject<Inc<Unit, ControlledByPlayer>>
+        readonly private EcsFilterInject<Inc<UnitComponent, IsControlledByPlayerComponent>>
             _units = default;
 
         readonly private EcsPoolInject<MoveCommand>

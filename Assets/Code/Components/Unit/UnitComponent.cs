@@ -1,14 +1,13 @@
 
-using Assets.Code.Configs;
 using UnityEngine;
 
 namespace Assets.Code.Components
 {
-    public struct Unit
+    public struct UnitComponent
     {
         public Transform Transform;
         public Rigidbody2D RigidBody;
 
-        public UnitSettings Settings;
+        public UnitAvatar Avatar;
     }
 }

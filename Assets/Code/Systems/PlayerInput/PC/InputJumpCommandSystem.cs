@@ -10,7 +10,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
     public sealed class InputJumpCommandSystem : IEcsRunSystem
     {
         private EcsPoolInject<JumpCommand> _jumpCommandPool = default;
-        private EcsFilterInject<Inc<Unit, ControlledByPlayer>> 
+        private EcsFilterInject<Inc<UnitComponent, IsControlledByPlayerComponent>> 
             _playerUnits = default;
 
         public void Run(IEcsSystems systems)

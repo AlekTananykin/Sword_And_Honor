@@ -2,14 +2,17 @@
 
 using Assets.Code.Components;
 using Assets.Code.Components.Commands;
+using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
 namespace Assets.Code.Systems
 {
-    public class UnitStopMoveSystem : UnitSystemBase, IEcsRunSystem
+    public class UnitStopMoveSystem : IEcsRunSystem
     {
-        private EcsFilterInject<Inc<Unit, StopMoveCommand>>
+        private EcsCustomInject<IControlAnimationService> _animationService;
+
+        private EcsFilterInject<Inc<UnitComponent, StopMoveCommand>>
            _idleUnitFilter = default;
 
         private EcsPoolInject<StopMoveCommand> _idleCommandPool = default;
@@ -18,7 +21,7 @@ namespace Assets.Code.Systems
         {
             foreach (var entity in _idleUnitFilter.Value)
             {
-                _animationService.StartAnimation(
+                _animationService.Value.StartAnimation(
                     entity, Configs.AnimationTrack.idle, true, 5.0f);
 
                 _idleCommandPool.Value.Del(entity);

@@ -38,12 +38,6 @@ public sealed class ControlSoundService: IControlSoundService
         });
     }
 
-    public void StopSound(int unitEntity)
-    {
-        ref var unitSound = ref _unitSoundPool.Get(unitEntity);
-        unitSound.AudioPlayer.Stop();
-    }
-
     private AudioClip GetClip(SoundPlayConfig config, SoundTrack track)
     {
         return config.SoundSequences.Find(

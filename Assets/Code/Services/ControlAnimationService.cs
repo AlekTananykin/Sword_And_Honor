@@ -6,7 +6,7 @@ using static Assets.Code.Configs.SpriteAnimationConfig;
 
 namespace Assets.Code.Systems.Animation
 {
-    public sealed class ControlAnimationService
+    public sealed class ControlAnimationService: IControlAnimationService
     {
         public ControlAnimationService(IEcsSystems systems, 
             IControlSoundService soundService)
@@ -18,7 +18,7 @@ namespace Assets.Code.Systems.Animation
             _soundService = soundService;
         }
 
-        internal void StartAnimation(int unitEntity,
+        public void StartAnimation(int unitEntity,
             AnimationTrack track, bool isLoop, float speed)
         {
             if (_animationTaskPool.Has(unitEntity))
@@ -31,8 +31,7 @@ namespace Assets.Code.Systems.Animation
                 if (track != animation.Trak)
                 {
                     animation.Sleeps = false;
-                    _soundService.StopSound(unitEntity);
-                    
+
                     ref var unit = ref _unitAnimationPool.Get(unitEntity);
 
                     animation.Trak = track;
@@ -66,17 +65,11 @@ namespace Assets.Code.Systems.Animation
             }
         }
 
-        AnimationContext GetAnimationContext(ref UnitAnimationComponent animationComponent, 
+        private AnimationContext GetAnimationContext(ref UnitAnimationComponent animationComponent, 
             AnimationTrack track)
         {
             return animationComponent.AnimationConfig.Sequences.Find(
                     sequence => sequence.Track == track);
-        }
-
-        public void StopAnimation(int entity)
-        {
-            if (_animationTaskPool.Has(entity))
-                _animationTaskPool.Del(entity);
         }
 
         private EcsPool<AnimationTaskComponent>

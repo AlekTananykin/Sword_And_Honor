@@ -1,3 +1,4 @@
+using Assets.Code.Interfaces;
 using Assets.Code.Services;
 using Assets.Code.Systems;
 using Assets.Code.Systems.Animation;
@@ -20,29 +21,13 @@ namespace Assets.Code
             var world = new EcsWorld();
             _systems = new EcsSystems(world);
 
-            var timeService = new TimeService();
+            AddSystems(_systems);
+            InjectServices(_systems);
+            
+            _systems.Inject(_sceneData);
 
-            new PcInputSystemsAdder(_systems);
-
-            _systems
-                .Add(new TimeSystem())
-#if UNITY_EDITOR
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
-#endif
-                .Add(new PlayerInitSystem())
-                .Add(new UnitMoveSystem())
-                .Add(new UnitJumpSystem())
-                .Add(new UnitAttackSystem())
-                .Add(new UnitStopMoveSystem())
-
-                .Add(new FlipRendererSystem())
-                .Add(new UpdateAnimationSystem())
-                .Add(new PlaySoundSystem())
-                
-                .Inject(timeService, _sceneData)
-                .Init();
+            _systems.Init();
         }
-
 
         private void Update()
         {
@@ -54,6 +39,43 @@ namespace Assets.Code
             _systems?.Destroy();
             _systems?.GetWorld()?.Destroy();
             _systems = null;
+        }
+
+        void AddSystems(EcsSystems systems)
+        {
+            new PcInputSystemsAdder(systems);
+
+            systems
+            .Add(new TimeSystem())
+#if UNITY_EDITOR
+                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
+#endif
+                .Add(new PlayerInitSystem())
+                .Add(new UnitMoveSystem())
+                .Add(new UnitJumpSystem())
+                .Add(new UnitAttackSystem())
+                .Add(new UnitStopMoveSystem())
+
+                .Add(new FlipRendererSystem())
+                .Add(new UpdateAnimationSystem())
+                .Add(new JumpToFallAnimationSwitchSystem())
+                .Add(new PlaySoundSystem()
+
+                );
+        }
+
+        private void InjectServices(EcsSystems systems)
+        {
+            IControlSoundService soundService =
+                new ControlSoundService(systems);
+
+            systems.Inject(
+                  new TimeService()
+                , new ControlSoundService(systems)
+                , new ControlAnimationService(systems, soundService)
+                , new DamageService(systems)
+                , new RendererFlipService(systems)
+                );
         }
     }
 }

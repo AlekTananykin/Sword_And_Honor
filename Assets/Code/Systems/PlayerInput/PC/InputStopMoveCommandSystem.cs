@@ -10,7 +10,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
     public sealed class InputStopMoveCommandSystem : IEcsRunSystem
     {
         readonly private EcsFilterInject<
-            Inc<Unit, ControlledByPlayer> >
+            Inc<UnitComponent, IsControlledByPlayerComponent> >
             _unitEntities = default;
 
         readonly private EcsPoolInject<StopMoveCommand>

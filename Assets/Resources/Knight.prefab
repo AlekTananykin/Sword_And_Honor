@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 4224186378403902935}
   - component: {fileID: 4224186378403902921}
   - component: {fileID: 4224186378403902922}
-  - component: {fileID: 2604803935437489429}
   - component: {fileID: 4849786718641388546}
   - component: {fileID: -1548054124839418515}
+  - component: {fileID: 6597217172675134314}
+  - component: {fileID: 2237604021955733861}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Untagged
@@ -124,23 +125,6 @@ CapsuleCollider2D:
   m_Offset: {x: -0.031876713, y: 0.6947371}
   m_Size: {x: 0.7449852, y: 1.2457283}
   m_Direction: 0
---- !u!114 &2604803935437489429
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4224186378403902934}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63bfc5f7df996ea48a58795c8a3e915c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  NewStepVelocitySpeed: 0.1
-  StepSpeed: 1000
-  JumpSpeed: 1000
-  AnimationConfig: {fileID: 11400000, guid: da7e545cd699eaf459bdfdd95c7653fa, type: 2}
-  AudioConfig: {fileID: 11400000, guid: 2c5df38d7d8482c4ebb258a438e261f5, type: 2}
 --- !u!61 &4849786718641388546
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -263,3 +247,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6597217172675134314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224186378403902934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4977c395bcd1a864091c47b5a80a8469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NewStepVelocitySpeed: 0.5
+  StepSpeed: 1000
+  JumpSpeed: 1000
+  AnimationConfig: {fileID: 11400000, guid: da7e545cd699eaf459bdfdd95c7653fa, type: 2}
+  AudioConfig: {fileID: 11400000, guid: 2c5df38d7d8482c4ebb258a438e261f5, type: 2}
+--- !u!114 &2237604021955733861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4224186378403902934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ef0ae9041161145a67cae1e5a14658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
