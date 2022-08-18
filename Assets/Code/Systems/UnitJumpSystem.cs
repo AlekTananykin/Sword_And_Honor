@@ -11,7 +11,8 @@ namespace Assets.Code.Systems
     {
         private EcsCustomInject<IControlAnimationService> _animationService;
 
-        private EcsFilterInject<Inc<UnitComponent, JumpCommand>>
+        private EcsFilterInject<Inc<
+            UnitComponent, JumpCommand, IsReadyToGetCommandComponent>>
             _jumpUnitFilter = default;
 
         private EcsPoolInject<JumpCommand> _jumpCommandPool = default;

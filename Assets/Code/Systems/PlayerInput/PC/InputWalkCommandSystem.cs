@@ -7,10 +7,13 @@ using UnityEngine;
 
 namespace Assets.Code.Systems.PlayerInput.PC
 {
-    public sealed class InputMoveCommandSystem : IEcsRunSystem
+    public sealed class InputWalkCommandSystem : IEcsRunSystem
     {
-        readonly private EcsFilterInject<Inc<UnitComponent, IsControlledByPlayerComponent>>
-            _units = default;
+        readonly private EcsFilterInject<Inc
+            <UnitComponent
+            , IsControlledByPlayerComponent
+            , IsReadyToGetCommandComponent
+            >>_units = default;
 
         readonly private EcsPoolInject<MoveCommand>
             _moveCommandPool = default;
@@ -26,7 +29,6 @@ namespace Assets.Code.Systems.PlayerInput.PC
 
                 ref var move = ref _moveCommandPool.Value.Add(entity);
                 move.Effort = direction;
-
             }
         }
     }

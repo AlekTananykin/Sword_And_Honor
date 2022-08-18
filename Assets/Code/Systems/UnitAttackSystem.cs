@@ -10,7 +10,9 @@ namespace Assets.Code.Systems
     {
         private EcsCustomInject<IControlAnimationService> _animationService;
 
-        private EcsFilterInject<Inc<UnitComponent, AttackCommand>>
+        private EcsFilterInject<Inc<UnitComponent
+            , AttackCommand
+            , IsReadyToGetCommandComponent>>
             _attackUnitFilter = default;
 
         private EcsPoolInject<AttackCommand> _attackCommandPool = default;
@@ -18,12 +20,30 @@ namespace Assets.Code.Systems
 
         private EcsPoolInject<UnitComponent> _unitsPool = default;
 
+        private EcsPoolInject<HealthComponent> _healthPool = default;
+
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _attackUnitFilter.Value)
             {
+                ref var previousContext = ref _attackUnitFilter.Pools.Inc3.Get(entity);
+
+                Configs.AnimationTrack nextAnimation;
+                switch (previousContext.Track)
+                {
+                    case Configs.AnimationTrack.attack1:
+                        nextAnimation = Configs.AnimationTrack.attack2;
+                        break;
+                    case Configs.AnimationTrack.attack2:
+                        nextAnimation = Configs.AnimationTrack.attack3;
+                        break;
+                    default:
+                        nextAnimation = Configs.AnimationTrack.attack1;
+                        break;
+                }
+
                 _animationService.Value.StartAnimation(
-                    entity, Configs.AnimationTrack.attack1, _isLoop, 
+                    entity, nextAnimation, _isLoop,
                     Asserts.Code.Identifiers.UnitAnimationSpeed);
 
                 Attack(entity);
@@ -37,7 +57,17 @@ namespace Assets.Code.Systems
             ref var unit = ref _unitsPool.Value.Get(unitEntity);
             ref var attackComponent = ref _attackPool.Value.Get(unitEntity);
 
-            attackComponent.Attak.Attack();
+            int targetEntity = attackComponent.Attak.Attack();
+            if (-1 == targetEntity)
+                return;
+
+
+            if (!_healthPool.Value.Has(targetEntity))
+                return;
+
+            ref var health = ref _healthPool.Value.Get(targetEntity);
+            health.Health -= 5.0f;
+
         }
 
         private const bool _isLoop = false;

@@ -1,13 +1,12 @@
-﻿using Leopotam.EcsLite;
-using System;
+﻿
 
 namespace Assets.Code.Units
 {
     class ThrowingAttack : UnitAttack
     {
-        public override void Attack()
+        public override int Attack()
         {
-            throw new NotImplementedException();
+            return -1;
         }
     }
 }

@@ -24,24 +24,47 @@ MonoBehaviour:
     - {fileID: 21300012, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300014, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     BeginAnimationSound: 0
-    IsLoopBeginAnimationSound: 1
+    IsLoopBeginAnimationSound: 0
     EndAnimationSound: 0
+  - Track: 5
+    Sprites:
+    - {fileID: 21300074, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300076, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300078, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300080, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    BeginAnimationSound: 0
+    IsLoopBeginAnimationSound: 0
+    EndAnimationSound: 5
+  - Track: 6
+    Sprites:
+    - {fileID: 21300082, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300084, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300086, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300088, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    BeginAnimationSound: 0
+    IsLoopBeginAnimationSound: 0
+    EndAnimationSound: 5
   - Track: 2
+    Sprites:
+    - {fileID: 21300026, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300028, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300030, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300032, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    - {fileID: 21300034, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+    BeginAnimationSound: 0
+    IsLoopBeginAnimationSound: 0
+    EndAnimationSound: 2
+  - Track: 1
     Sprites:
     - {fileID: 21300016, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300018, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300020, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300022, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300024, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300026, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300028, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300030, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300032, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300034, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    BeginAnimationSound: 3
-    IsLoopBeginAnimationSound: 1
-    EndAnimationSound: 0
-  - Track: 5
+    BeginAnimationSound: 0
+    IsLoopBeginAnimationSound: 0
+    EndAnimationSound: 2
+  - Track: 7
     Sprites:
     - {fileID: 21300036, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300038, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
@@ -49,10 +72,10 @@ MonoBehaviour:
     - {fileID: 21300042, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300044, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300046, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    BeginAnimationSound: 6
+    BeginAnimationSound: 7
     IsLoopBeginAnimationSound: 0
     EndAnimationSound: 0
-  - Track: 6
+  - Track: 8
     Sprites:
     - {fileID: 21300048, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300050, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
@@ -60,10 +83,10 @@ MonoBehaviour:
     - {fileID: 21300054, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300056, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300058, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    BeginAnimationSound: 7
+    BeginAnimationSound: 8
     IsLoopBeginAnimationSound: 0
     EndAnimationSound: 0
-  - Track: 7
+  - Track: 9
     Sprites:
     - {fileID: 21300060, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300062, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
@@ -73,27 +96,10 @@ MonoBehaviour:
     - {fileID: 21300070, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300072, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300074, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    BeginAnimationSound: 8
+    BeginAnimationSound: 9
     IsLoopBeginAnimationSound: 0
     EndAnimationSound: 0
-  - Track: 3
-    Sprites:
-    - {fileID: 21300076, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300078, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300080, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    BeginAnimationSound: 4
-    IsLoopBeginAnimationSound: 0
-    EndAnimationSound: 0
-  - Track: 4
-    Sprites:
-    - {fileID: 21300082, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300084, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300086, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    - {fileID: 21300088, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-    BeginAnimationSound: 0
-    IsLoopBeginAnimationSound: 0
-    EndAnimationSound: 5
-  - Track: 9
+  - Track: 11
     Sprites:
     - {fileID: 21300090, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300092, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
@@ -101,7 +107,7 @@ MonoBehaviour:
     BeginAnimationSound: 10
     IsLoopBeginAnimationSound: 0
     EndAnimationSound: 0
-  - Track: 10
+  - Track: 12
     Sprites:
     - {fileID: 21300096, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
     - {fileID: 21300098, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}

@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: KnightSoundConfig
   m_EditorClassIdentifier: 
   SoundSequences:
-  - Track: 3
-    Clip: {fileID: 8300000, guid: 69a1cba5022b43b478202d9b934c61bb, type: 3}
   - Track: 5
     Clip: {fileID: 8300000, guid: eec53751c4e79a7469fc34e774360128, type: 3}
   - Track: 6
@@ -22,10 +20,12 @@ MonoBehaviour:
   - Track: 7
     Clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
   - Track: 8
+    Clip: {fileID: 8300000, guid: b76357a42d03a4722afcba74c3073136, type: 3}
+  - Track: 9
     Clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
-  - Track: 4
-    Clip: {fileID: 8300000, guid: eec53751c4e79a7469fc34e774360128, type: 3}
   - Track: 10
-    Clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
+    Clip: {fileID: 8300000, guid: ebcbb664018f947728cb9b67468b0f48, type: 3}
   - Track: 11
     Clip: {fileID: 8300000, guid: 52fa067c25c5c401b811eb86d142287e, type: 3}
+  - Track: 2
+    Clip: {fileID: 8300000, guid: eec53751c4e79a7469fc34e774360128, type: 3}

@@ -9,8 +9,11 @@ namespace Assets.Code.Systems.PlayerInput.PC
 {
     public sealed class InputAttackCommandSystem : IEcsRunSystem
     {
-        readonly private EcsFilterInject<Inc<UnitComponent, IsControlledByPlayerComponent>>
-           _units = default;
+        readonly private EcsFilterInject<Inc<
+            UnitComponent
+            , IsControlledByPlayerComponent
+            , IsReadyToGetCommandComponent
+            >> _units = default;
 
         readonly private EcsPoolInject<AttackCommand>
             _attackCommandPool = default;

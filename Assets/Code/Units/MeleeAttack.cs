@@ -14,19 +14,16 @@ namespace Assets.Code.Units
         [SerializeField]
         private float _attackDamage;
 
-
-        public override void Attack()
+        public override int Attack()
         {
             var hit = Physics2D.Raycast(
                 _attackRayPosition, Vector2.right, _attackDistance);
 
-            if (null == hit.collider)
-                return;
+            if (null != hit.collider 
+                && hit.collider.gameObject.TryGetComponent(out UnitAvatar target))
+                return target.Entity;
 
-            if (!hit.collider.gameObject.TryGetComponent(out UnitAvatar target))
-            {
-                //int  target.Entity;
-            }
+            return -1;
         }
     }
 }

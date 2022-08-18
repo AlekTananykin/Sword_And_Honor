@@ -6,6 +6,7 @@ public enum SoundTrack
 {
     noSound,
     idle,
+    step,
     walk,
     run,
     jump,

@@ -51,10 +51,9 @@ namespace Assets.Code
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
                 .Add(new PlayerInitSystem())
-                .Add(new UnitMoveSystem())
+                .Add(new UnitWalkSystem())
                 .Add(new UnitJumpSystem())
                 .Add(new UnitAttackSystem())
-                .Add(new UnitStopMoveSystem())
 
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
@@ -75,6 +74,7 @@ namespace Assets.Code
                 , new ControlAnimationService(systems, soundService)
                 , new DamageService(systems)
                 , new RendererFlipService(systems)
+                , new CommandAnimationController(systems)
                 );
         }
     }

@@ -43,10 +43,6 @@ namespace Assets.Code.Systems.Animation
         private void UpdateAnimation(
             float deltaTime, ref AnimationTaskComponent unitAnimation)
         {
-            if (unitAnimation.Sleeps)
-            {
-                return;
-            }
 
             unitAnimation.Counter += deltaTime * unitAnimation.Speed;
 

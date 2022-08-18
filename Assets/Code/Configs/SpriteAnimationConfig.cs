@@ -7,6 +7,8 @@ namespace Assets.Code.Configs
     public enum AnimationTrack
     {
         idle,
+        leftLegstep,
+        rightLegStep,
         walk,
         run,
         jump,

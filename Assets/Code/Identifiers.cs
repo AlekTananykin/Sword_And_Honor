@@ -9,6 +9,6 @@ namespace Asserts.Code
 
         public const string PlayerPrefabName = "Knight";
 
-        public const float UnitAnimationSpeed = 5.0f;
+        public const float UnitAnimationSpeed = 10.0f;
     }
 }
