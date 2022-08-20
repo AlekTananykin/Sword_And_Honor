@@ -12,11 +12,13 @@ namespace Assets.Code.Systems
 {
     public sealed class UnitWalkSystem : IEcsRunSystem
     {
+        private EcsPoolInject<IsReadyToGetCommandComponent>
+            _isReadyToGetCommandPool = default;
         private EcsCustomInject<RendererFlipService> _renderFlipService = default;
         private EcsCustomInject<ControlAnimationService> _animationService = default;
 
-        private EcsFilterInject<Inc<UnitComponent, MoveCommand, StepComponent, 
-            IsReadyToGetCommandComponent>> 
+        private EcsFilterInject<Inc<UnitComponent, MoveCommand, StepComponent>, 
+            Exc<JumpCommand>> 
             _moveUnitFilter = default;
 
         private EcsPoolInject<MoveCommand> _moveCommandPool = default;
@@ -27,34 +29,39 @@ namespace Assets.Code.Systems
             {
                 ref var unit = ref _moveUnitFilter.Pools.Inc1.Get(entity);
 
-                if (unit.RigidBody.velocity.magnitude <= unit.Avatar.NewStepVelocitySpeed && 
-                    unit.Avatar.IsGrounded)
+                if (unit.Avatar.IsGrounded && 
+                    _isReadyToGetCommandPool.Value.Has(entity))
                 {
-                    ref var command = ref _moveUnitFilter.Pools.Inc2.Get(entity);
-
-                    unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
-                        new Vector2(command.Effort * unit.Avatar.StepSpeed, 0));
-
-                    _renderFlipService.Value.Flip(entity, command.Effort < 0.0f);
-
-                    ref var step = ref _moveUnitFilter.Pools.Inc3.Get(entity);
-
-                    if (step.IsLeftLeg)
-                    {
-                        _animationService.Value.StartAnimation(
-                            entity, Configs.AnimationTrack.leftLegstep, false,
-                            Identifiers.UnitAnimationSpeed);
-                    }
-                    else
-                    {
-                        _animationService.Value.StartAnimation(
-                            entity, Configs.AnimationTrack.rightLegStep, false,
-                            Identifiers.UnitAnimationSpeed);
-                    }
-                    step.IsLeftLeg = !step.IsLeftLeg;
+                    MakeStep(ref unit, entity);
                 }
                 _moveCommandPool.Value.Del(entity);
             }
+        }
+
+        void MakeStep(ref UnitComponent unit, int entity)
+        {
+            ref var command = ref _moveUnitFilter.Pools.Inc2.Get(entity);
+
+            unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
+                new Vector2(command.Effort * unit.Avatar.StepSpeed, 0));
+
+            _renderFlipService.Value.Flip(entity, command.Effort < 0.0f);
+
+            ref var step = ref _moveUnitFilter.Pools.Inc3.Get(entity);
+
+            if (step.IsLeftLeg)
+            {
+                _animationService.Value.StartAnimation(
+                    entity, Configs.AnimationTrack.leftLegstep, false,
+                    Identifiers.UnitAnimationSpeed);
+            }
+            else
+            {
+                _animationService.Value.StartAnimation(
+                    entity, Configs.AnimationTrack.rightLegStep, false,
+                    Identifiers.UnitAnimationSpeed);
+            }
+            step.IsLeftLeg = !step.IsLeftLeg;
         }
     }
 }

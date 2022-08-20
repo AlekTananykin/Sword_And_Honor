@@ -9,9 +9,11 @@ using UnityEngine;
 public class UnitAvatar : MonoBehaviour
 {
     [Header("Moving")]
-    public float NewStepVelocitySpeed = 0.5f;
-    public float StepSpeed = 1000.0f;
-    public float JumpSpeed = 1000.0f;
+    public float StepSpeed = 7000.0f;
+    public float JumpSpeed = 10000.0f;
+
+    [Header("Attack")]
+    public float DamageSize = 5.0f;
 
     [Header("Health")]
     public float Health = 100.0f;

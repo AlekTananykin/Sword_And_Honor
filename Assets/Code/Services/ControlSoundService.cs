@@ -30,6 +30,8 @@ public sealed class ControlSoundService: IControlSoundService
             return;
         }
 
+        soundQueue.Clips.Clear();
+
         soundQueue.Clips.Enqueue(new SoundTask
         {
             Clip = clip,

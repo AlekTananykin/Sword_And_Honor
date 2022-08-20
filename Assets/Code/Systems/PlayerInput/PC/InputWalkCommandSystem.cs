@@ -12,8 +12,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
         readonly private EcsFilterInject<Inc
             <UnitComponent
             , IsControlledByPlayerComponent
-            , IsReadyToGetCommandComponent
-            >>_units = default;
+            >, Exc<MoveCommand>>_units = default;
 
         readonly private EcsPoolInject<MoveCommand>
             _moveCommandPool = default;

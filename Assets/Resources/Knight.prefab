@@ -259,9 +259,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4977c395bcd1a864091c47b5a80a8469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewStepVelocitySpeed: 0.1
-  StepSpeed: 100
-  JumpSpeed: 1000
+  StepSpeed: 7000
+  JumpSpeed: 10000
   Health: 100
   AnimationConfig: {fileID: 11400000, guid: da7e545cd699eaf459bdfdd95c7653fa, type: 2}
   AudioConfig: {fileID: 11400000, guid: 2c5df38d7d8482c4ebb258a438e261f5, type: 2}

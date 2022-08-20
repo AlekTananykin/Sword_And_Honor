@@ -13,8 +13,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
         private EcsFilterInject<Inc<
             UnitComponent
             , IsControlledByPlayerComponent
-            , IsReadyToGetCommandComponent
-            >>  _playerUnits = default;
+            >, Exc<JumpCommand>>  _playerUnits = default;
 
         public void Run(IEcsSystems systems)
         {
