@@ -11,8 +11,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
     {
         readonly private EcsFilterInject<Inc
             <UnitComponent
-            , IsControlledByPlayerComponent
-            >, Exc<MoveCommand>>_units = default;
+            , IsControlledByPlayerComponent>>_units = default;
 
         readonly private EcsPoolInject<MoveCommand>
             _moveCommandPool = default;
@@ -21,13 +20,13 @@ namespace Assets.Code.Systems.PlayerInput.PC
         {
             foreach (var entity in _units.Value)
             {
-                var direction = Input.GetAxisRaw(Identifiers.HorizontalAxis);
+                var effort = Input.GetAxisRaw(Identifiers.HorizontalAxis);
 
-                if (0 == direction)
+                if (0 == effort)
                     continue;
 
                 ref var move = ref _moveCommandPool.Value.Add(entity);
-                move.Effort = direction;
+                move.Effort = effort;
             }
         }
     }
