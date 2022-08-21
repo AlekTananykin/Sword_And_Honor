@@ -9,10 +9,10 @@ namespace Assets.Code.Systems.Animation
         private EcsPoolInject<FlipRendererComponent> 
             _flipRenderedPool = default;
 
-        private EcsPoolInject<AnimationTaskComponent> 
+        private EcsPoolInject<AnimationContextComponent> 
             _animationTaskPool = default;
 
-        private EcsFilterInject<Inc<FlipRendererComponent, AnimationTaskComponent>>
+        private EcsFilterInject<Inc<FlipRendererComponent, AnimationContextComponent>>
             _flipFilter = default;
 
         public void Run(IEcsSystems systems)

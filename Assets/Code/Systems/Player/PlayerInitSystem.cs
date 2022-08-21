@@ -1,7 +1,5 @@
 ﻿using Asserts.Code;
 using Assets.Code.Components;
-using Assets.Code.Components.Commands;
-using Assets.Code.Components.Unit;
 using Assets.Code.Fabrics;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
@@ -14,13 +12,11 @@ namespace Assets.Code.Systems.Player
     {
         EcsPoolInject<UnitComponent> _unitPool = default;
         EcsPoolInject<UnitAnimationComponent> _unitAnimationPool = default;
-        EcsPoolInject<StepComponent> _stepPool = default;
+
         EcsPoolInject<UnitSoundComponent> _unitSoundPool = default;
         EcsPoolInject<AttackComponent> _attackPool = default;
         EcsPoolInject<HealthComponent> _healthPool = default;
-        EcsPoolInject<IsReadyToGetCommandComponent> 
-            _isReadyToGetCommandComponent = default;
-
+      
         EcsPoolInject<IsControlledByPlayerComponent> _isControllerByPlayer = default;
                 
         EcsCustomInject<ControlAnimationService> _animationService = default;
@@ -43,7 +39,6 @@ namespace Assets.Code.Systems.Player
             SoundInit(player, unitAvatar, playerEntity);
             AttackFacilitiesInit(player, unitAvatar, playerEntity);
             HealthInit(unitAvatar, playerEntity);
-            AnimationControlInit(playerEntity);
 
             _animationService.Value.StartAnimation(
                 playerEntity, Configs.AnimationTrack.idle, true, 5.0f);
@@ -70,8 +65,6 @@ namespace Assets.Code.Systems.Player
                 unitGameObject.GetComponent<SpriteRenderer>();
 
             unitAnimation.AnimationConfig = settings.AnimationConfig;
-
-            _stepPool.Value.Add(unitEntity).IsLeftLeg = true;
         }
 
         private void SoundInit(GameObject unitGameObject, UnitAvatar settings, int unitEntity)
@@ -79,8 +72,6 @@ namespace Assets.Code.Systems.Player
             ref var unitSound = ref _unitSoundPool.Value.Add(unitEntity);
             unitSound.AudioPlayer =
                 unitGameObject.GetComponent<AudioSource>();
-
-            unitSound.SoundConfig = settings.AudioConfig;
         }
 
         private void AttackFacilitiesInit(
@@ -96,14 +87,6 @@ namespace Assets.Code.Systems.Player
         {
             ref var unitHealth = ref _healthPool.Value.Add(unitEntity);
             unitHealth.Health = avatart.Health;
-        }
-
-        private void AnimationControlInit(int unitEntity)
-        {
-            ref var isReady =
-                ref _isReadyToGetCommandComponent.Value.Add(unitEntity);
-            isReady.Track = Configs.AnimationTrack.idle;
-            isReady.Time = 0.0f;
         }
     }
 }

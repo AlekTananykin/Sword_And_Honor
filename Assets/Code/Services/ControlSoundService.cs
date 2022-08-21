@@ -1,7 +1,6 @@
-using Assets.Code.Components;
+using Assets.Code.Components.Unit;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
-using System.Collections.Generic;
 using UnityEngine;
 
 public sealed class ControlSoundService: IControlSoundService
@@ -9,54 +8,27 @@ public sealed class ControlSoundService: IControlSoundService
     public ControlSoundService(IEcsSystems systems)
     {
         EcsWorld world = systems.GetWorld();
-        _soundQueuePool = world.GetPool<SoundQueueComponent>();
-        _unitSoundPool = world.GetPool<UnitSoundComponent>();
+        _soundContextPool = world.GetPool<SoundTaskComponent>();
     }
 
-    public void PlaySound(int unitEntity, SoundTrack track, bool isLoop)
+    public void PlaySound(int entity, AudioClip soundClip, bool isLoop)
     {
-        if (SoundTrack.noSound == track)
+        if (null == soundClip)
             return;
 
-        ref SoundQueueComponent soundQueue = ref GetSoundQueue(unitEntity);
-
-        ref var unitSound = ref _unitSoundPool.Get(unitEntity);
-
-        AudioClip clip = GetClip(unitSound.SoundConfig, track);
-
-        if (null == clip)
+        if (_soundContextPool.Has(entity))
         {
-            Debug.LogWarning($"there is not sound for track {track}");
-            return;
+            ref var soundContext = ref _soundContextPool.Get(entity);
+            soundContext.Clip = soundClip;
+            soundContext.IsLoop = isLoop;
         }
-
-        soundQueue.Clips.Clear();
-
-        soundQueue.Clips.Enqueue(new SoundTask
+        else
         {
-            Clip = clip,
-            Track = track, 
-            IsLoop = isLoop
-        });
+            ref var soundContext = ref _soundContextPool.Add(entity);
+            soundContext.Clip = soundClip;
+            soundContext.IsLoop = isLoop;
+        }
     }
 
-    private AudioClip GetClip(SoundPlayConfig config, SoundTrack track)
-    {
-        return config.SoundSequences.Find(
-              sequence => track == sequence.Track)?.Clip;
-    }
-
-    private ref SoundQueueComponent GetSoundQueue(int unitEntity)
-    {
-        if (_soundQueuePool.Has(unitEntity))
-            return ref _soundQueuePool.Get(unitEntity);
-
-        ref var soundTask = ref _soundQueuePool.Add(unitEntity);
-        soundTask.Clips = new Queue<SoundTask>();
-
-        return ref soundTask;
-    }
-
-    private EcsPool<SoundQueueComponent> _soundQueuePool = default;
-    private EcsPool<UnitSoundComponent> _unitSoundPool = default;
+    private EcsPool<SoundTaskComponent> _soundContextPool = default;
 }

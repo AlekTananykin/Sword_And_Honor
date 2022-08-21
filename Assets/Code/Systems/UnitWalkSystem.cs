@@ -1,7 +1,6 @@
 ﻿using Asserts.Code;
 using Assets.Code.Components;
 using Assets.Code.Components.Commands;
-using Assets.Code.Components.Unit;
 using Assets.Code.Services;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
@@ -12,16 +11,12 @@ namespace Assets.Code.Systems
 {
     public sealed class UnitWalkSystem : IEcsRunSystem
     {
-        private EcsPoolInject<IsReadyToGetCommandComponent>
-            _isReadyToGetCommandPool = default;
         private EcsCustomInject<RendererFlipService> _renderFlipService = default;
         private EcsCustomInject<ControlAnimationService> _animationService = default;
 
-        private EcsFilterInject<Inc<UnitComponent, MoveCommand, StepComponent>, 
-            Exc<JumpCommand>> 
-            _moveUnitFilter = default;
+        private EcsFilterInject<Inc<UnitComponent, MoveCommand>, 
+            Exc<JumpCommand>> _moveUnitFilter = default;
 
-        private EcsPoolInject<MoveCommand> _moveCommandPool = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -29,16 +24,15 @@ namespace Assets.Code.Systems
             {
                 ref var unit = ref _moveUnitFilter.Pools.Inc1.Get(entity);
 
-                if (unit.Avatar.IsGrounded && 
-                    _isReadyToGetCommandPool.Value.Has(entity))
+                if (unit.Avatar.IsGrounded)
                 {
-                    MakeStep(ref unit, entity);
+                    Move(ref unit, entity);
                 }
-                _moveCommandPool.Value.Del(entity);
+                _moveUnitFilter.Pools.Inc2.Del(entity);
             }
         }
 
-        void MakeStep(ref UnitComponent unit, int entity)
+        void Move(ref UnitComponent unit, int entity)
         {
             ref var command = ref _moveUnitFilter.Pools.Inc2.Get(entity);
 
@@ -47,21 +41,10 @@ namespace Assets.Code.Systems
 
             _renderFlipService.Value.Flip(entity, command.Effort < 0.0f);
 
-            ref var step = ref _moveUnitFilter.Pools.Inc3.Get(entity);
+            _animationService.Value.StartAnimation(
+                entity, Configs.AnimationTrack.walk, false,
+                Identifiers.UnitAnimationSpeed);
 
-            if (step.IsLeftLeg)
-            {
-                _animationService.Value.StartAnimation(
-                    entity, Configs.AnimationTrack.leftLegstep, false,
-                    Identifiers.UnitAnimationSpeed);
-            }
-            else
-            {
-                _animationService.Value.StartAnimation(
-                    entity, Configs.AnimationTrack.rightLegStep, false,
-                    Identifiers.UnitAnimationSpeed);
-            }
-            step.IsLeftLeg = !step.IsLeftLeg;
         }
     }
 }

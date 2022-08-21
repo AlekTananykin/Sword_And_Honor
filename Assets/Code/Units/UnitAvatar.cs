@@ -21,9 +21,6 @@ public class UnitAvatar : MonoBehaviour
     [Header("Animation")]
     public SpriteAnimationConfig AnimationConfig = default;
 
-    [Header("Audio")]
-    public SoundPlayConfig AudioConfig = default;
-
     public bool IsGrounded { get; private set; }
 
     public void OnTriggerEnter2D(Collider2D collision)

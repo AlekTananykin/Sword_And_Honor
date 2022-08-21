@@ -1,5 +1,4 @@
 ﻿using Assets.Code.Components;
-using Assets.Code.Components.Commands;
 using Assets.Code.Configs;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
@@ -9,74 +8,64 @@ namespace Assets.Code.Systems.Animation
 {
     public sealed class ControlAnimationService: IControlAnimationService
     {
-        public ControlAnimationService(IEcsSystems systems, 
-            IControlSoundService soundService)
+        public ControlAnimationService(IEcsSystems systems)
         {
             var world = systems.GetWorld();
-            _animationTaskPool = world.GetPool<AnimationTaskComponent>();
+            _animationContextPool = world.GetPool<AnimationContextComponent>();
             _unitAnimationPool = world.GetPool<UnitAnimationComponent>();
-            _isReadyToGetCommandComponent = 
-                world.GetPool<IsReadyToGetCommandComponent>();
-
-            _soundService = soundService;
         }
 
         public void StartAnimation(int unitEntity,
             AnimationTrack track, bool isLoop, float speed)
         {
-            if (_animationTaskPool.Has(unitEntity))
+            if (_animationContextPool.Has(unitEntity))
             {
-                ref var animation = ref _animationTaskPool.Get(unitEntity);
+                ref var animationContext = ref _animationContextPool.Get(unitEntity);
 
-                animation.Loop = isLoop;
-                animation.Speed = speed;
+                animationContext.Loop = isLoop;
+                animationContext.Speed = speed;
                 
-                if (track != animation.Trak)
+                if (track != animationContext.Trak)
                 {
-                    animation.Sleeps = false;
+                    animationContext.Sleeps = false;
 
-                    ref var unit = ref _unitAnimationPool.Get(unitEntity);
+                    ref var animationComponent = ref _unitAnimationPool.Get(unitEntity);
 
-                    var prevAnimationContext = GetAnimationContext(
-                        ref unit, animation.Trak);
+                    animationContext.Trak = track;
 
-                    _soundService.PlaySound(
-                        unitEntity, prevAnimationContext.EndAnimationSound, false);
+                    var animationClip = GetAnimationClip(ref animationComponent, track);
 
-                    SetAnimationReadyComponent(unitEntity, animation.Trak, isLoop);
-                    animation.Trak = track;
-
-                    var animationContext = GetAnimationContext(ref unit, track);
-
-                    animation.Sprites = animationContext.Sprites;
-                    animation.Counter = 0;
-
-                    _soundService.PlaySound(unitEntity, animationContext.BeginAnimationSound, 
-                        animationContext.IsLoopBeginAnimationSound);
+                    animationContext.Clip = animationClip.Clip;
+                    animationContext.Counter = 0;
                 }
             }
             else
             {
-                ref var animation = ref _animationTaskPool.Add(unitEntity);
-                ref var unit = ref _unitAnimationPool.Get(unitEntity);
+                ref var animationContext = 
+                    ref _animationContextPool.Add(unitEntity);
 
-                SetAnimationReadyComponent(unitEntity, animation.Trak, isLoop);
-                animation.Trak = track;
+                animationContext.Loop = isLoop;
+                animationContext.Speed = speed;
+                animationContext.Sleeps = false;
 
-                var animationContext = GetAnimationContext(ref unit, track);
+                ref var unitAnimationComponent = 
+                    ref _unitAnimationPool.Get(unitEntity);
 
-                animation.Sprites = animationContext.Sprites;
+                animationContext.Trak = track;
 
-                animation.SpriteRenderer = unit.SpriteRenderer;
+                var animationClip = GetAnimationClip(
+                    ref unitAnimationComponent, track);
 
-                animation.Loop = isLoop;
-                animation.Speed = speed;
-                animation.Counter = 0;
-                animation.Sleeps = false;
+                animationContext.Clip = animationClip.Clip;
+
+                animationContext.SpriteRenderer = 
+                    unitAnimationComponent.SpriteRenderer;
+                
+                animationContext.Counter = 0;
             }
         }
 
-        private AnimationContext GetAnimationContext(
+        private AnimationClip GetAnimationClip(
             ref UnitAnimationComponent animationComponent, 
             AnimationTrack track)
         {
@@ -84,34 +73,9 @@ namespace Assets.Code.Systems.Animation
                     sequence => sequence.Track == track);
         }
 
-        private void SetAnimationReadyComponent(int entity, 
-            AnimationTrack previousTrack, bool isLoopNew)
-        {
-            if (isLoopNew)
-            {
-                if (!_isReadyToGetCommandComponent.Has(entity))
-                {
-                    ref var isReady = ref _isReadyToGetCommandComponent.Add(entity);
-                    isReady.Track = previousTrack;
-                    isReady.Time = 0.0f;
-                }
-
-                return;
-            }
-
-            if (_isReadyToGetCommandComponent.Has(entity))
-                _isReadyToGetCommandComponent.Del(entity);
-        }
-
-
-        private EcsPool<AnimationTaskComponent>
-            _animationTaskPool = default;
+        private EcsPool<AnimationContextComponent>
+            _animationContextPool = default;
 
         private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
-
-        private EcsPool<IsReadyToGetCommandComponent>
-           _isReadyToGetCommandComponent = default;
-
-        private IControlSoundService _soundService;
     }
 }

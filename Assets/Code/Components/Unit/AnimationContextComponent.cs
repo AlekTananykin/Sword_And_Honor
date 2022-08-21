@@ -1,14 +1,16 @@
 ﻿using Assets.Code.Configs;
 using System.Collections.Generic;
 using UnityEngine;
+using static Assets.Code.Configs.SpriteAnimationConfig;
 
 namespace Assets.Code.Components
 {
-    public struct AnimationTaskComponent
+    public struct AnimationContextComponent
     {
         public AnimationTrack Trak;
         public SpriteRenderer SpriteRenderer;
-        public List<Sprite> Sprites;
+
+        public List<AnimationFrame> Clip;
         
         public bool Loop;
         public float Speed;

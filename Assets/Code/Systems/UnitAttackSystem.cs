@@ -14,9 +14,6 @@ namespace Assets.Code.Systems
             , AttackCommand>>
             _attackUnitFilter = default;
 
-        private EcsPoolInject<IsReadyToGetCommandComponent>
-           _isReadyToGetCommandPool = default;
-
         private EcsPoolInject<AttackCommand> _attackCommandPool = default;
         private EcsPoolInject<AttackComponent> _attackPool = default;
 
@@ -28,30 +25,15 @@ namespace Assets.Code.Systems
         {
             foreach (var entity in _attackUnitFilter.Value)
             {
-                if (_isReadyToGetCommandPool.Value.Has(entity))
-                {
-                    ref var previousContext = ref _isReadyToGetCommandPool.Value.Get(entity);
 
-                    Configs.AnimationTrack nextAnimation;
-                    switch (previousContext.Track)
-                    {
-                        case Configs.AnimationTrack.attack1:
-                            nextAnimation = Configs.AnimationTrack.attack2;
-                            break;
-                        case Configs.AnimationTrack.attack2:
-                            nextAnimation = Configs.AnimationTrack.attack3;
-                            break;
-                        default:
-                            nextAnimation = Configs.AnimationTrack.attack1;
-                            break;
-                    }
+                Configs.AnimationTrack nextAnimation = Configs.AnimationTrack.attack1;
 
-                    _animationService.Value.StartAnimation(
-                        entity, nextAnimation, _isLoop,
+                _animationService.Value.StartAnimation(
+                        entity, nextAnimation, false,
                         Asserts.Code.Identifiers.UnitAnimationSpeed);
 
                     Attack(entity);
-                }
+              
                 _attackCommandPool.Value.Del(entity);
             }
         }
@@ -72,7 +54,5 @@ namespace Assets.Code.Systems
             ref var health = ref _healthPool.Value.Get(targetEntity);
             health.Health -= unit.Avatar.DamageSize;
         }
-
-        private const bool _isLoop = false;
     }
 }

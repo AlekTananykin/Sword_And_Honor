@@ -7,10 +7,8 @@ namespace Assets.Code.Configs
     public enum AnimationTrack
     {
         idle,
-        leftLegstep,
-        rightLegStep,
-        walk,
         run,
+        walk,
         jump,
         fall,
         attack1,
@@ -21,22 +19,25 @@ namespace Assets.Code.Configs
         death
     }
 
+
     [CreateAssetMenu (fileName ="SpriteAnimationConfig", 
         menuName ="Configs/SpriteAnimationConfig")]
     public sealed  class SpriteAnimationConfig: ScriptableObject
     {
         [Serializable]
-        public sealed class AnimationContext
+        public sealed class AnimationFrame
         {
-            public AnimationTrack Track;
-            public List<Sprite> Sprites = new List<Sprite>();
-
-            public SoundTrack BeginAnimationSound;
-            public bool IsLoopBeginAnimationSound;
-
-            public SoundTrack EndAnimationSound;
+            public Sprite Sprite = default;
+            public AudioClip AudioClip = default;
         }
 
-        public List<AnimationContext> Sequences = new List<AnimationContext>();
+        [Serializable]
+        public sealed class AnimationClip
+        {
+            public AnimationTrack Track;
+            public List<AnimationFrame> Clip = new List<AnimationFrame>();
+        }
+
+        public List<AnimationClip> Sequences = new List<AnimationClip>();
     }
 }

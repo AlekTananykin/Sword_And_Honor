@@ -46,7 +46,7 @@ namespace Assets.Code
             new PcInputSystemsAdder(systems);
 
             systems
-            .Add(new TimeSystem())
+                .Add(new TimeSystem())
 #if UNITY_EDITOR
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
@@ -71,10 +71,9 @@ namespace Assets.Code
             systems.Inject(
                   new TimeService()
                 , new ControlSoundService(systems)
-                , new ControlAnimationService(systems, soundService)
+                , new ControlAnimationService(systems)
                 , new DamageService(systems)
                 , new RendererFlipService(systems)
-                , new CommandAnimationController(systems)
                 );
         }
     }
