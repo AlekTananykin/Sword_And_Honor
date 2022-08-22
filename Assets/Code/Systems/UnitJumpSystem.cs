@@ -10,7 +10,6 @@ namespace Assets.Code.Systems
 {
     public sealed class UnitJumpSystem : IEcsRunSystem
     {
-
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _jumpUnitFilter.Value)

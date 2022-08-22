@@ -20,6 +20,8 @@ namespace Assets.Code.Systems.Animation
                     _animationService.Value.StartAnimation(
                         animationEntity, Configs.AnimationTrack.idle, true, 
                         Identifiers.UnitAnimationSpeed);
+
+                    continue;
                 }
 
                 UpdateAnimation(

@@ -18,9 +18,14 @@ public sealed class PlaySoundSystem : IEcsRunSystem
 
             ref var soundTask = ref _soundTaskFilter.Pools.Inc1.Get(unitEntity);
 
+            if (player.isPlaying)
+                continue;
+
             player.loop = soundTask.IsLoop;
             player.clip = soundTask.Clip;
             player.Play();
+
+            _soundTaskFilter.Pools.Inc1.Del(unitEntity);
         }
     }
 }

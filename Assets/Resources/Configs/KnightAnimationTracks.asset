@@ -51,8 +51,6 @@ MonoBehaviour:
       AudioClip: {fileID: 0}
     - Sprite: {fileID: 21300034, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
       AudioClip: {fileID: 8300000, guid: 6154d2d90f91ac743a30a16a58f9fa32, type: 3}
-    - Sprite: {fileID: 21300028, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
-      AudioClip: {fileID: 0}
   - Track: 5
     Clip:
     - Sprite: {fileID: 21300036, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
@@ -140,4 +138,14 @@ MonoBehaviour:
     - Sprite: {fileID: 21300112, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
       AudioClip: {fileID: 0}
     - Sprite: {fileID: 21300114, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}
+  - Track: 3
+    Clip:
+    - Sprite: {fileID: 21300074, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300076, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300078, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300080, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
       AudioClip: {fileID: 0}

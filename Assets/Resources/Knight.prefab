@@ -100,7 +100,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 70
+  m_Mass: 100
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -259,11 +259,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4977c395bcd1a864091c47b5a80a8469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StepSpeed: 7000
-  JumpSpeed: 10000
+  StepSpeed: 400
+  JumpSpeed: 100
+  DamageSize: 5
   Health: 100
   AnimationConfig: {fileID: 11400000, guid: da7e545cd699eaf459bdfdd95c7653fa, type: 2}
-  AudioConfig: {fileID: 11400000, guid: 2c5df38d7d8482c4ebb258a438e261f5, type: 2}
 --- !u!114 &2237604021955733861
 MonoBehaviour:
   m_ObjectHideFlags: 0
