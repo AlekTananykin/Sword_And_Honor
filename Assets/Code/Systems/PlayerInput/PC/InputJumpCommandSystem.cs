@@ -11,7 +11,7 @@ namespace Assets.Code.Systems.PlayerInput.PC
     {
         private EcsPoolInject<JumpCommand> _jumpCommandPool = default;
         private EcsFilterInject<Inc<UnitComponent
-            , IsControlledByPlayerComponent>>  _playerUnits = default;
+            , IsControlledByPlayerComponent>, Exc<JumpCommand>>  _playerUnits = default;
 
         public void Run(IEcsSystems systems)
         {

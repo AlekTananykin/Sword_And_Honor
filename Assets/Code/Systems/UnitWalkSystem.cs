@@ -11,13 +11,6 @@ namespace Assets.Code.Systems
 {
     public sealed class UnitWalkSystem : IEcsRunSystem
     {
-        private EcsCustomInject<RendererFlipService> _renderFlipService = default;
-        private EcsCustomInject<ControlAnimationService> _animationService = default;
-
-        private EcsFilterInject<Inc<UnitComponent, MoveCommand>, 
-            Exc<JumpCommand>> _moveUnitFilter = default;
-
-
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _moveUnitFilter.Value)
@@ -46,5 +39,11 @@ namespace Assets.Code.Systems
                 Identifiers.UnitAnimationSpeed);
 
         }
+
+        private EcsCustomInject<RendererFlipService> _renderFlipService = default;
+        private EcsCustomInject<ControlAnimationService> _animationService = default;
+
+        private EcsFilterInject<Inc<UnitComponent, MoveCommand>,
+            Exc<JumpCommand>> _moveUnitFilter = default;
     }
 }

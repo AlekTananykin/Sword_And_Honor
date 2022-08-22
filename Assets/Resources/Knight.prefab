@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StepSpeed: 400
-  JumpSpeed: 100
+  JumpSpeed: 4000
   DamageSize: 5
   Health: 100
   AnimationConfig: {fileID: 11400000, guid: da7e545cd699eaf459bdfdd95c7653fa, type: 2}

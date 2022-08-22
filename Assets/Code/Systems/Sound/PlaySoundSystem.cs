@@ -13,10 +13,17 @@ public sealed class PlaySoundSystem : IEcsRunSystem
     {
         foreach (var unitEntity in _soundTaskFilter.Value)
         {
+            ref var soundTask = ref _soundTaskFilter.Pools.Inc1.Get(unitEntity);
+            if (null == soundTask.Clip)
+            {
+                _soundTaskFilter.Pools.Inc1.Del(unitEntity);
+                continue;
+            }
+
             ref var unitSound = ref _soundTaskFilter.Pools.Inc2.Get(unitEntity);
             var player = unitSound.AudioPlayer;
 
-            ref var soundTask = ref _soundTaskFilter.Pools.Inc1.Get(unitEntity);
+            
 
             if (player.isPlaying)
                 continue;
@@ -25,6 +32,7 @@ public sealed class PlaySoundSystem : IEcsRunSystem
             player.clip = soundTask.Clip;
             player.Play();
 
+            soundTask.Clip = null;
             _soundTaskFilter.Pools.Inc1.Del(unitEntity);
         }
     }
