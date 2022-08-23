@@ -35,7 +35,7 @@ namespace Assets.Code.Systems
             _renderFlipService.Value.Flip(entity, command.Effort < 0.0f);
 
             _animationService.Value.StartAnimation(
-                entity, Configs.AnimationTrack.walk, false,
+                entity, Configs.AnimationTrack.walk, true,
                 Identifiers.UnitAnimationSpeed);
 
         }

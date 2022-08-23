@@ -54,6 +54,7 @@ namespace Assets.Code
                 .Add(new UnitWalkSystem())
                 .Add(new UnitJumpSystem())
                 .Add(new UnitAttackSystem())
+                .Add(new StopWalkSystem())
 
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
