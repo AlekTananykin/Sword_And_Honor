@@ -9,9 +9,9 @@ public sealed class SceneData : MonoBehaviour
 
 #if UNITY_EDITOR
 
-    [ContextMenu("Find Cells")]
+    [ContextMenu("Compose Ground Cells")]
 
-    void FindCells()
+    void ComposeCells()
     {
         CellView[] Cells = FindObjectsOfType<CellView>();
 
@@ -21,7 +21,7 @@ public sealed class SceneData : MonoBehaviour
         foreach (var cell in Cells)
         {
             cellsDictionsry.Add(new Vector2(
-                cell.transform.position.x, cell.transform.position.z), cell);
+                cell.transform.position.x, cell.transform.position.y), cell);
         }
 
         List<GameObject> platformsList = new List<GameObject>();
@@ -34,54 +34,55 @@ public sealed class SceneData : MonoBehaviour
         Dictionary<Vector2, CellView> cellsDictionsry,
         List<GameObject> platformsList)
     {
-        List<CellView> platfomrComposition = new List<CellView>();
+        List<CellView> platformsComposition = new List<CellView>();
         while (cellsDictionsry.Count > 0)
         {
             var cellEnumerator = cellsDictionsry.GetEnumerator();
-            cellEnumerator.MoveNext();
-
-            GameObject platform = new GameObject();
-            platform.name = "Platform";
-            platformsList.Add(platform);
+            if (!cellEnumerator.MoveNext())
+                break;
 
             var refCell = cellEnumerator.Current.Value;
+            cellsDictionsry.Remove(cellEnumerator.Current.Key);
+            cellEnumerator.Dispose();
+
             float beginCellX = refCell.transform.position.x;
             float beginCellY = refCell.transform.position.y;
 
             float endCellX = beginCellX;
             float endCellY = beginCellY;
 
-            Vector2 key = new Vector2(beginCellX, beginCellY);
+            platformsComposition.Add(refCell);
 
-            platfomrComposition.Add(refCell);
-
-            FindCells(cellsDictionsry, platfomrComposition, refCell.XyStep,
+            FindCells(cellsDictionsry, platformsComposition, refCell.XyStep,
                 ref endCellX, ref endCellY);
 
-            FindCells(cellsDictionsry, platfomrComposition, -refCell.XyStep,
+            FindCells(cellsDictionsry, platformsComposition, -refCell.XyStep,
                 ref beginCellX, ref beginCellY);
 
-            platform.transform.position = new Vector3((beginCellX + endCellX) / 2, 
-                (beginCellY + endCellY) / 2, 0);
+            GameObject platform = new GameObject("Platform");
+            platformsList.Add(platform);
 
-            AddPlatformComponents(platformsList, platform.transform);
+            platform.transform.position = new Vector3(
+                (beginCellX + endCellX) / 2.0f, 
+                (beginCellY + endCellY) / 2.0f, 0.0f);
 
-            platformsList.Clear();
+            AddPlatformComponents(platformsComposition, platform.transform);
+
+            platformsComposition.Clear();
 
             AddCollider(platform, 
                 beginCellX, beginCellY, endCellX, endCellY, refCell.XyStep);
-
-            cellsDictionsry.Remove(key);
-
-            cellEnumerator.Dispose();
         }
     }
 
     private void AddPlatformComponents(
-        List<GameObject> platformsList, Transform parentTransform)
+        List<CellView> platformsList, Transform parentTransform)
     {
         foreach (var component in platformsList)
-            component.transform.parent = parentTransform;
+        {
+            component.transform.SetParent(parentTransform);
+            component.enabled = false;
+        }
     }
 
     private void AddCollider(GameObject platform,
@@ -96,7 +97,6 @@ public sealed class SceneData : MonoBehaviour
 
         collider.size = new Vector2(endCellX - beginCellX + cellSize, 
             endCellY - beginCellY + cellSize);
-
     }
 
     private void FindCells(Dictionary<Vector2, CellView> cellsDictionsry, 
