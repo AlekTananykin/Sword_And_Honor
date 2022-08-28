@@ -30,6 +30,26 @@ public sealed class SceneData : MonoBehaviour
         Platforms = platformsList.ToArray();
     }
 
+    [ContextMenu("Decompose platforms")]
+    void DecomposeGroundCells()
+    {
+        for (int i = 0; i < Platforms.Length; ++ i)
+        {
+            var platform = Platforms[i];
+            CellView[] children = platform.GetComponentsInChildren<CellView>();
+
+            for (int childCounter = 0; childCounter < children.Length; ++childCounter)
+            {
+                var child = children[childCounter];
+                child.enabled = true;
+                child.gameObject.transform.parent = null;
+            }
+            DestroyImmediate(platform);
+        }
+
+        Platforms = null;
+    }
+
     private void CreatePlatforms(
         Dictionary<Vector2, CellView> cellsDictionsry,
         List<GameObject> platformsList)
