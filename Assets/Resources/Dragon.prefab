@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 78cb51b531ddb89419c7fa611c7098dc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b7515e4ea7c454c49b2c75ccd02c3c5a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -259,12 +259,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4977c395bcd1a864091c47b5a80a8469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NewStepVelocitySpeed: 0.5
   StepSpeed: 1000
   JumpSpeed: 1000
+  DamageSize: 5
   Health: 100
   AnimationConfig: {fileID: 11400000, guid: deb01b448bd9ed943bb470fcec8fa0a1, type: 2}
-  AudioConfig: {fileID: 11400000, guid: d1cc03752472b38418075a5268ef5986, type: 2}
 --- !u!114 &1777268012548567695
 MonoBehaviour:
   m_ObjectHideFlags: 0

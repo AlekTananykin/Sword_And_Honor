@@ -14,55 +14,98 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Sequences:
   - Track: 0
-    Sprites:
-    - {fileID: 21300000, guid: 20daa800a641d9e4cae18a06630db1ef, type: 3}
-    - {fileID: 21300000, guid: 50a4a2787b97b4d4080a545cb036d0fb, type: 3}
-    - {fileID: 21300000, guid: 761e277bc5c84c3419e2a42c396dde31, type: 3}
-    - {fileID: 21300000, guid: f53e5e300297519409f636d0b0aef3fa, type: 3}
-    - {fileID: 21300000, guid: d6f80947af627e947b45cfa7a5ccc2c9, type: 3}
-    - {fileID: 21300000, guid: 4f4ced12cb9b05c488e369f8bae6ab32, type: 3}
-  - Track: 1
-    Sprites:
-    - {fileID: 21300000, guid: 7a268daa419d0e041979667b63108f9e, type: 3}
-    - {fileID: 21300000, guid: a4a838635c1946245a3791f2cbd0b7da, type: 3}
-    - {fileID: 21300000, guid: b17555818e8bcde4182df8208cae6d59, type: 3}
-    - {fileID: 21300000, guid: 021102fe9c09c2b4fb3ac4750079466a, type: 3}
-    - {fileID: 21300000, guid: c88d922637b19234da41452d8b511703, type: 3}
-    - {fileID: 21300000, guid: e592590eeed369147aa09e7f5a2f91c4, type: 3}
+    Clip:
+    - Sprite: {fileID: 21300000, guid: b7515e4ea7c454c49b2c75ccd02c3c5a, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 4ee3e5c2dff3893488f3ed1753590f84, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: ab61c7b6fd8af1840badd7950d29c904, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 8bd42d5a5357e4843a07a717bb3f9877, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 8feb5ead2e20dda4495497b9d5803e26, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 6484f72edb3bc2141b8ba3b58da4fcbc, type: 3}
+      AudioClip: {fileID: 0}
+  - Track: 2
+    Clip:
+    - Sprite: {fileID: 21300000, guid: 7a268daa419d0e041979667b63108f9e, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: a4a838635c1946245a3791f2cbd0b7da, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: b17555818e8bcde4182df8208cae6d59, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 021102fe9c09c2b4fb3ac4750079466a, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: c88d922637b19234da41452d8b511703, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: e592590eeed369147aa09e7f5a2f91c4, type: 3}
+      AudioClip: {fileID: 0}
   - Track: 3
-    Sprites:
-    - {fileID: 21300000, guid: b4f8ab210891eef46885f89a223729c9, type: 3}
-    - {fileID: 21300000, guid: d04b2e2ac712a4842b02a4f701ec1ac9, type: 3}
+    Clip:
+    - Sprite: {fileID: 21300000, guid: b4f8ab210891eef46885f89a223729c9, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: d04b2e2ac712a4842b02a4f701ec1ac9, type: 3}
+      AudioClip: {fileID: 0}
   - Track: 5
-    Sprites:
-    - {fileID: 21300000, guid: 2d81263c15e0870429e027cfa336f392, type: 3}
-    - {fileID: 21300000, guid: 2ac0bdb1f72273446853e8d81225c348, type: 3}
-    - {fileID: 21300000, guid: 080098adc5ac9cc428f1a442160eef31, type: 3}
+    Clip:
+    - Sprite: {fileID: 21300000, guid: 0c27445db20e54940b1490e0ca6064ff, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: eca0457a5dc141242a6ec90150f60e5f, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 0d6594445b5cc4146817199d025683c6, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: e45a451e151495344bea21674ef19382, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 043fb9136996b2d41b5405f06ce6c40b, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 99b9111a585ebd84db79b64e52f31760, type: 3}
+      AudioClip: {fileID: 0}
   - Track: 6
-    Sprites:
-    - {fileID: 21300000, guid: cfb0994800bda9d46ac37ca2d06f5c51, type: 3}
-    - {fileID: 21300000, guid: 629e63a13f5fdc0479184fc58e22bb9b, type: 3}
-    - {fileID: 21300000, guid: e5a801c3d96b4f842b19dde07d6261ca, type: 3}
+    Clip:
+    - Sprite: {fileID: 21300000, guid: 2cfa1c0551a5053498d318a35afa430a, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 50762ded9d0c97842b3e47efe3ea0264, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: cee5c9e9355bc6d43bf6181820845aa4, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 218495b6ba17467439866087d7d0e319, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: b432f3cbc0530fb40998fe16a598fe30, type: 3}
+      AudioClip: {fileID: 0}
   - Track: 7
-    Sprites:
-    - {fileID: 21300000, guid: 2cfa1c0551a5053498d318a35afa430a, type: 3}
-    - {fileID: 21300000, guid: 50762ded9d0c97842b3e47efe3ea0264, type: 3}
-    - {fileID: 21300000, guid: cee5c9e9355bc6d43bf6181820845aa4, type: 3}
-    - {fileID: 21300000, guid: 218495b6ba17467439866087d7d0e319, type: 3}
-    - {fileID: 21300000, guid: b432f3cbc0530fb40998fe16a598fe30, type: 3}
+    Clip:
+    - Sprite: {fileID: 21300000, guid: 86dd9be60465fb34184fc959f80f9c3b, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 86e87241270197e45b086a829c6a264d, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: da8a5f7390f7f6540a7bee429abf5cb1, type: 3}
+      AudioClip: {fileID: 0}
   - Track: 9
-    Sprites:
-    - {fileID: 21300000, guid: be10954042b1a354083779a30207d6fc, type: 3}
-    - {fileID: 21300000, guid: 3c61c0b2df19cfe40a7b03903d091e04, type: 3}
+    Clip:
+    - Sprite: {fileID: 21300000, guid: be10954042b1a354083779a30207d6fc, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 3c61c0b2df19cfe40a7b03903d091e04, type: 3}
+      AudioClip: {fileID: 0}
   - Track: 10
-    Sprites:
-    - {fileID: 21300000, guid: 78cb51b531ddb89419c7fa611c7098dc, type: 3}
-    - {fileID: 21300000, guid: c96b02b971b0a4243881a4f47f4d3179, type: 3}
-    - {fileID: 21300000, guid: 2d0a58967735e414e8ccd71cf74ba3f5, type: 3}
-    - {fileID: 21300000, guid: 0d77f73d4d99df547aa70ffcb58767a5, type: 3}
-    - {fileID: 21300000, guid: 57a5401a8028e9847bdaf9dca66842ae, type: 3}
-    - {fileID: 21300000, guid: 52a5a82183727ce4683d2ff5c1b740fc, type: 3}
-    - {fileID: 21300000, guid: 895446a4a3e3b0244a8ac2dafd8b340d, type: 3}
-    - {fileID: 21300000, guid: 1289cfc7a590bfa46a26fea9481b9b01, type: 3}
-    - {fileID: 21300000, guid: 934dbebcf629a074796684fd60d8354c, type: 3}
-    - {fileID: 21300000, guid: fa68cdd324c4f9c4ca11785d86b8e1ef, type: 3}
+    Clip:
+    - Sprite: {fileID: 21300000, guid: 78cb51b531ddb89419c7fa611c7098dc, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: c96b02b971b0a4243881a4f47f4d3179, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 2d0a58967735e414e8ccd71cf74ba3f5, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 0d77f73d4d99df547aa70ffcb58767a5, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 57a5401a8028e9847bdaf9dca66842ae, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 52a5a82183727ce4683d2ff5c1b740fc, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 895446a4a3e3b0244a8ac2dafd8b340d, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 1289cfc7a590bfa46a26fea9481b9b01, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: 934dbebcf629a074796684fd60d8354c, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300000, guid: fa68cdd324c4f9c4ca11785d86b8e1ef, type: 3}
+      AudioClip: {fileID: 0}
