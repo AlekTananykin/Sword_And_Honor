@@ -149,3 +149,13 @@ MonoBehaviour:
       AudioClip: {fileID: 0}
     - Sprite: {fileID: 21300080, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
       AudioClip: {fileID: 0}
+  - Track: 4
+    Clip:
+    - Sprite: {fileID: 21300074, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300076, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300078, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}
+    - Sprite: {fileID: 21300080, guid: ae297123f091bbf4e8f1835eb98fb293, type: 3}
+      AudioClip: {fileID: 0}

@@ -1,3 +1,4 @@
+using Asserts.Code;
 using Assets.Code.SceneData;
 using Sccene;
 using System;
@@ -5,17 +6,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public struct EnemyData
+public struct CharacterData
 {
     public Vector3 Position;
-    public string PrefabName;
+    public CharacterType Type;
 }
 
 public sealed class SceneFragment : MonoBehaviour
 {
     public GameObject[] Platforms;
-
-    public EnemyData[] EnemyData;
+    public CharacterData[] Characters;
 
 
 #if UNITY_EDITOR
@@ -54,28 +54,29 @@ public sealed class SceneFragment : MonoBehaviour
         Platforms = null;
     }
 
-    [ContextMenu("Add Moving chars")]
-    void AddAllEnemies()
+    [ContextMenu("Add Dragons")]
+    void AddDragons()
     {
-        var avatars = FindObjectsOfType<UnitAvatar>();
-        List<EnemyData> enemyDataList = new List<EnemyData>();
+        var avatars = FindObjectsOfType<DragonGizmos>();
+        List<CharacterData> enemyDataList = new List<CharacterData>();
 
         for (int i = 0; i < avatars.Length; ++i)
         {
-            enemyDataList.Add(new EnemyData { 
+            enemyDataList.Add(new CharacterData
+            {
                 Position = avatars[i].transform.position,
-                //PrefabName = avatars[i].
+                Type = CharacterType.Dragon
             });
         }
 
-        EnemyData = enemyDataList.ToArray();
+        Characters = enemyDataList.ToArray();
 
     }
 
-    [ContextMenu("Remove All moving chars")]
+    [ContextMenu("Remove All Characters")]
     void RemoveMovingChars()
     {
-        
+        Characters = null;
     }
 
 #endif
