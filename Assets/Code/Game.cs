@@ -12,7 +12,7 @@ namespace Assets.Code
 {
     public sealed class Game : MonoBehaviour
     {
-        [SerializeField] SceneData _sceneData;
+       
 
         EcsSystems _systems;
 
@@ -24,7 +24,7 @@ namespace Assets.Code
             AddSystems(_systems);
             InjectServices(_systems);
             
-            _systems.Inject(_sceneData);
+           
 
             _systems.Init();
         }
@@ -55,6 +55,7 @@ namespace Assets.Code
                 .Add(new UnitJumpSystem())
                 .Add(new UnitAttackSystem())
                 .Add(new StopWalkSystem())
+                .Add(new FallAfterWalkSystem())
 
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
