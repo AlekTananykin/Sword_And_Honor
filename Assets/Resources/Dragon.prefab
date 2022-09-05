@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4758750424128287708}
   - component: {fileID: 520409083243086223}
   - component: {fileID: 1777268012548567695}
+  - component: {fileID: -1631248572871247568}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -276,3 +277,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cbee51c16ffec4aa2a2dac0911fd9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1631248572871247568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4082952075303526365}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ef0ae9041161145a67cae1e5a14658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackDistance: 1
+  _attackRayPosition: {x: 0, y: 0}
+  _attackDamage: 0

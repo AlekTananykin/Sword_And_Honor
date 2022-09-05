@@ -1,16 +1,9 @@
 using Asserts.Code;
+using Assets.Code.ECS.Components;
 using Assets.Code.SceneData;
 using Sccene;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-
-[Serializable]
-public struct CharacterData
-{
-    public Vector3 Position;
-    public CharacterType Type;
-}
 
 public sealed class SceneFragment : MonoBehaviour
 {
