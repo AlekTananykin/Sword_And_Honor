@@ -11,7 +11,11 @@ namespace Asserts.Code
 
         public const float UnitAnimationSpeed = 10.0f;
 
-        
+    }
+
+    public static class PrefabPathes
+    {
+        public const string GragonPrefabPath = "";
     }
 
     public enum CharacterType { Dragon }
