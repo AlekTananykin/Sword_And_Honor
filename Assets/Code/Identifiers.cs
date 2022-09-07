@@ -15,7 +15,10 @@ namespace Asserts.Code
 
     public static class PrefabPathes
     {
-        public const string GragonPrefabPath = "";
+        public const string DragonPrefabPath = "Dragon";
+        public const string KnightPrefabPath = "Knight";
+        public const string ChestPrefabPath = "Chest";
+
     }
 
     public enum CharacterType { Dragon }

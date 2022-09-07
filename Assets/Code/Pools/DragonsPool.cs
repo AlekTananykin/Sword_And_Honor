@@ -4,22 +4,27 @@ using UnityEngine;
 
 namespace Assets.Code.Pools
 {
-    class DragonsPool: GamePool
+    class DragonsPool: GamePool, IPool
     {
         public DragonsPool(IGameObjectFabric fabric)
-            :base(fabric, PrefabPathes.GragonPrefabPath)
+            :base(fabric, PrefabPathes.DragonPrefabPath)
         { 
         }
 
-        public GameObject CreateDragon()
+        public GameObject Create()
         {
-            return GetGameObject();
+            return base.GetGameObject();
         }
 
         public void Intake(ref GameObject dragon)
         {
             base.Intake(dragon);
             dragon = null;
+        }
+
+        GameObject IPool.GetGameObject()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

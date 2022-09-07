@@ -9,29 +9,22 @@ namespace Sccene
 #endif
     public sealed class CellView : MonoBehaviour
     {
-        public Transform Transform;
-        public float XyStep = 1.0f;
-
-        void Awaike() 
-        {
-            Transform = transform;
-        }
-
 
 #if UNITY_EDITOR
 
+        public float XyStep = 1.0f;
         void Update()
         {
-            if (Application.isPlaying || !Transform.hasChanged)
+            if (Application.isPlaying || !transform.hasChanged)
                 return;
 
             var newPosition = Vector3.zero;
-            var curPosition = Transform.localPosition;
+            var curPosition = transform.localPosition;
 
             newPosition.x = Mathf.RoundToInt(curPosition.x / XyStep) * XyStep;
             newPosition.y = Mathf.RoundToInt(curPosition.y / XyStep) * XyStep;
 
-            Transform.localPosition = newPosition;
+            transform.localPosition = newPosition;
         }
 #endif
     }
