@@ -1,6 +1,4 @@
-﻿
-
-using Assets.Code.Configs;
+﻿using Assets.Code.Configs;
 
 namespace Assets.Code.Interfaces
 {

@@ -7,10 +7,11 @@ namespace Asserts.Code
         public const string Attack = "Attack";
         public const string Idle = "Idle";
 
-        public const string PlayerPrefabName = "Knight";
+        public const string PlayerPrefabName = "Knights/Knight";
 
         public const float UnitAnimationSpeed = 10.0f;
 
+        public const string SceneConfigPath = "Configs/SceneConfig";
     }
 
     public static class PrefabPathes

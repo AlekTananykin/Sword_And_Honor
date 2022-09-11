@@ -5,9 +5,10 @@ using UnityEngine;
 namespace Assets.Code.ECS.Components
 {
     [Serializable]
-    public struct CharacterData
+    public struct GameObjectData
     {
         public Vector3 Position;
         public CharacterType Type;
+        public string Path;
     }
 }

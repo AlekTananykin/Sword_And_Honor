@@ -11,20 +11,15 @@ namespace Assets.Code.Pools
         { 
         }
 
-        public GameObject Create()
+        public new void Intake(ref GameObject dragon)
         {
-            return base.GetGameObject();
-        }
-
-        public void Intake(ref GameObject dragon)
-        {
-            base.Intake(dragon);
+            base.Intake(ref dragon);
             dragon = null;
         }
 
         GameObject IPool.GetGameObject()
         {
-            throw new System.NotImplementedException();
+            return base.GetGameObject();
         }
     }
 }

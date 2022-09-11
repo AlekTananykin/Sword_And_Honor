@@ -17,9 +17,11 @@ namespace Assets.Code.Systems.Player
         EcsPoolInject<AttackComponent> _attackPool = default;
         EcsPoolInject<HealthComponent> _healthPool = default;
       
-        EcsPoolInject<IsControlledByPlayerComponent> _isControllerByPlayer = default;
+        EcsPoolInject<IsControlledByPlayerComponent> 
+            _isControllerByPlayer = default;
                 
-        EcsCustomInject<ControlAnimationService> _animationService = default;
+        EcsCustomInject<ControlAnimationService> 
+            _animationService = default;
 
         public void Init(IEcsSystems systems)
         {
@@ -67,7 +69,8 @@ namespace Assets.Code.Systems.Player
             unitAnimation.AnimationConfig = settings.AnimationConfig;
         }
 
-        private void SoundInit(GameObject unitGameObject, UnitAvatar settings, int unitEntity)
+        private void SoundInit(
+            GameObject unitGameObject, UnitAvatar settings, int unitEntity)
         {
             ref var unitSound = ref _unitSoundPool.Value.Add(unitEntity);
             unitSound.AudioPlayer =

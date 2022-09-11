@@ -8,7 +8,8 @@ namespace Assets.Code.Systems
 {
     public sealed class UnitAttackSystem : IEcsRunSystem
     {
-        private EcsCustomInject<IControlAnimationService> _animationService;
+        private EcsCustomInject<IControlAnimationService> 
+            _animationService = default;
 
         private EcsFilterInject<Inc<UnitComponent
             , AttackCommand>>

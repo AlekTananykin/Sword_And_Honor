@@ -1,4 +1,7 @@
-using Assets.Code.Interfaces;
+using Asserts.Code;
+using Assets.Code.ECS.Systems.Init;
+using Assets.Code.Fabrics;
+using Assets.Code.Pools;
 using Assets.Code.Services;
 using Assets.Code.Systems;
 using Assets.Code.Systems.Animation;
@@ -12,8 +15,6 @@ namespace Assets.Code
 {
     public sealed class Game : MonoBehaviour
     {
-       
-
         EcsSystems _systems;
 
         private void Start()
@@ -23,8 +24,9 @@ namespace Assets.Code
 
             AddSystems(_systems);
             InjectServices(_systems);
-            
-           
+
+            new SceneLoaderService(
+                 Identifiers.SceneConfigPath, _systems);
 
             _systems.Init();
         }
@@ -51,6 +53,8 @@ namespace Assets.Code
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
                 .Add(new PlayerInitSystem())
+                .Add(new PlatformsInitSystem())
+
                 .Add(new UnitWalkSystem())
                 .Add(new UnitJumpSystem())
                 .Add(new UnitAttackSystem())
@@ -60,22 +64,19 @@ namespace Assets.Code
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
                 .Add(new JumpToFallAnimationSwitchSystem())
-                .Add(new PlaySoundSystem()
-
-                );
+                .Add(new PlaySoundSystem())
+                ;
         }
 
         private void InjectServices(EcsSystems systems)
         {
-            IControlSoundService soundService =
-                new ControlSoundService(systems);
-
             systems.Inject(
                   new TimeService()
                 , new ControlSoundService(systems)
                 , new ControlAnimationService(systems)
                 , new DamageService(systems)
                 , new RendererFlipService(systems)
+                , new VariousObjectsPool(new GameObjectsFabric())
                 );
         }
     }
