@@ -11,7 +11,14 @@ namespace Asserts.Code
 
         public const float UnitAnimationSpeed = 10.0f;
 
-        public const string SceneConfigPath = "Configs/SceneConfig";
+        public const string PlatformsConfigPath = 
+            "Configs/SceneConfig";
+        public const string EnemiesLocationConfigPath = 
+            "Configs/EnemiesLocationConfig";
+        public const string TrapsLocationConfigPath =
+            "Configs/TrapsLocationConfig";
+        public const string GiftsLocationConfigPath =
+            "Configs/GiftsLocationConfig";
     }
 
     public static class PrefabPathes

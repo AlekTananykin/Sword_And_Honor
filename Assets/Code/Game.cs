@@ -9,6 +9,7 @@ using Assets.Code.Systems.Player;
 using Assets.Code.Systems.PlayerInput.PC;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using System;
 using UnityEngine;
 
 namespace Assets.Code
@@ -25,10 +26,18 @@ namespace Assets.Code
             AddSystems(_systems);
             InjectServices(_systems);
 
-            new SceneLoaderService(
-                 Identifiers.SceneConfigPath, _systems);
+            LoadingServices(_systems);
 
             _systems.Init();
+        }
+
+        private void LoadingServices(EcsSystems systems)
+        {
+            new PlatformsLoaderService(
+                Identifiers.PlatformsConfigPath, _systems);
+
+            new EnemyLoadService(
+                Identifiers.EnemiesLocationConfigPath, _systems);
         }
 
         private void Update()

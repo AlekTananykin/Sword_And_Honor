@@ -6,20 +6,20 @@ using UnityEngine;
 
 namespace Assets.Code.Services
 {
-    public class SceneLoaderService
+    public class PlatformsLoaderService
     {
-        public SceneLoaderService(string path, IEcsSystems systems)
+        public PlatformsLoaderService(string pathToConfig, IEcsSystems systems)
         {
             var world = systems.GetWorld();
 
             var isPlatformPool = world.GetPool<IsPlatform>();
             var gameObjectDataPool = world.GetPool<GameObjectData>();
 
-            var sceneConfig = Resources.Load<SceneConfig>(path);
+            var platformsConfig = Resources.Load<PlatformsLocationConfig>(pathToConfig);
 
-            for (int i = 0; i < sceneConfig.Count; ++i)
+            for (int i = 0; i < platformsConfig.Count; ++i)
             {
-                var platformData = sceneConfig[i];
+                var platformData = platformsConfig[i];
                 int entity = world.NewEntity();
 
                 isPlatformPool.Add(entity);
