@@ -1,4 +1,5 @@
 ﻿
+using Assets.Code.Configs;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -16,7 +17,7 @@ namespace Assets.Code.ECS.Systems.Init
         public void Init(IEcsSystems systems)
         {
             var enemiesConfig =
-               Resources.Load<PlatformsLocationConfig>(_pathToConfig);
+               Resources.Load<EnemiesLocationConfig>(_pathToConfig);
 
             var unitInitializer = _unitInitService.Value;
 

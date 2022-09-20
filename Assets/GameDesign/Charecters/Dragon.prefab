@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3168749946507669883}
   - component: {fileID: 5790372139718664053}
   m_Layer: 0
-  m_Name: DragonGizmos
+  m_Name: Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

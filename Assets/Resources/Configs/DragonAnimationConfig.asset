@@ -17,7 +17,7 @@ MonoBehaviour:
     Clip:
     - Sprite: {fileID: 21300000, guid: b7515e4ea7c454c49b2c75ccd02c3c5a, type: 3}
       AudioClip: {fileID: 0}
-    - Sprite: {fileID: 21300000, guid: 4ee3e5c2dff3893488f3ed1753590f84, type: 3}
+    - Sprite: {fileID: 21300000, guid: b7515e4ea7c454c49b2c75ccd02c3c5a, type: 3}
       AudioClip: {fileID: 0}
     - Sprite: {fileID: 21300000, guid: ab61c7b6fd8af1840badd7950d29c904, type: 3}
       AudioClip: {fileID: 0}

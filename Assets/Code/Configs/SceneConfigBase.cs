@@ -42,14 +42,26 @@ namespace Assets.Code.Configs
 
             if (subPos < 0)
             {
-                pathBuilder.Append(name);
+                int spacePos = name.IndexOf(' ');
+                if (spacePos < 0)
+                {
+                    pathBuilder.Append(name);
+                }
+                else
+                {
+                    name = name.Substring(0, spacePos);
+                    pathBuilder.Append(name);
+
+                }
             }
             else
             {
                 pathBuilder.Append(name.Substring(0, subPos));
             }
+
             pathBuilder.Append("s/");
             pathBuilder.Append(name);
+
             return pathBuilder.ToString();
         }
     }

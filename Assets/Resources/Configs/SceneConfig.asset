@@ -14,14 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _targets:
   - Position: {x: 0.06, y: -3.1573358, z: 0}
-    Type: 0
     Path: Platforms/Platform_4
+    LeftUpperPoint: {x: 0, y: 0, z: 0}
+    LowBottomPoint: {x: 0, y: 0, z: 0}
   - Position: {x: 2.56, y: 0, z: 0}
-    Type: 0
     Path: Platforms/Platform_4
+    LeftUpperPoint: {x: 0, y: 0, z: 0}
+    LowBottomPoint: {x: 0, y: 0, z: 0}
   - Position: {x: -3.72, y: 0, z: 0}
-    Type: 0
     Path: Platforms/Platform_4
+    LeftUpperPoint: {x: 0, y: 0, z: 0}
+    LowBottomPoint: {x: 0, y: 0, z: 0}
   - Position: {x: 5.21, y: -3.64, z: 0}
-    Type: 0
     Path: Platforms/Platform_4
+    LeftUpperPoint: {x: 0, y: 0, z: 0}
+    LowBottomPoint: {x: 0, y: 0, z: 0}

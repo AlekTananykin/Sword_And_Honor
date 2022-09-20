@@ -13,12 +13,15 @@ MonoBehaviour:
   m_Name: EnemiesLocationConfig
   m_EditorClassIdentifier: 
   _targets:
-  - Position: {x: 2.57, y: 1.71, z: 0}
-    Type: 0
-    Path: DragonGizmos (1)s/DragonGizmos (1)
-  - Position: {x: -1.449873, y: -1.47, z: 0}
-    Type: 0
-    Path: DragonGizmos (2)s/DragonGizmos (2)
-  - Position: {x: -4.23, y: 1.77, z: 0}
-    Type: 0
-    Path: DragonGizmoss/DragonGizmos
+  - Position: {x: -3.78, y: 1.7, z: 0}
+    Path: Dragons/Dragon
+    LeftUpperPoint: {x: 0, y: 0, z: 0}
+    LowBottomPoint: {x: 0, y: 0, z: 0}
+  - Position: {x: 5.48, y: -1.77, z: 0}
+    Path: Dragons/Dragon
+    LeftUpperPoint: {x: 0, y: 0, z: 0}
+    LowBottomPoint: {x: 0, y: 0, z: 0}
+  - Position: {x: 1.02, y: -1.52, z: 0}
+    Path: Dragons/Dragon
+    LeftUpperPoint: {x: 0, y: 0, z: 0}
+    LowBottomPoint: {x: 0, y: 0, z: 0}
