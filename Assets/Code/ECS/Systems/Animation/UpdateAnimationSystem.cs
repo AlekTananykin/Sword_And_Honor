@@ -1,5 +1,5 @@
 ﻿using Asserts.Code;
-using Assets.Code.Components;
+using Assets.Code.ECS.Components;
 using Assets.Code.Services;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -57,8 +57,8 @@ namespace Assets.Code.Systems.Animation
         private EcsPoolInject<AnimationContextComponent>
            _animationTaskPool = default;
 
-        private EcsFilterInject<Inc<AnimationContextComponent>>
-            _animationTaskFilterFilter = default;
+        private EcsFilterInject<Inc<AnimationContextComponent>, 
+            Exc<IsActive>> _animationTaskFilterFilter = default;
 
         private readonly EcsCustomInject<TimeService> _timeService = default;
 

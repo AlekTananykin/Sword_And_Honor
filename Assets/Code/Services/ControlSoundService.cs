@@ -1,4 +1,4 @@
-using Assets.Code.Components.Unit;
+using Assets.Code.ECS.Components.Unit;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using UnityEngine;

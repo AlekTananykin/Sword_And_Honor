@@ -1,5 +1,5 @@
-﻿using Assets.Code.Components;
-using Assets.Code.Components.Commands;
+﻿using Assets.Code.ECS.Components;
+using Assets.Code.ECS.Components.Commands;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -12,7 +12,7 @@ namespace Assets.Code.Systems
             _animationService = default;
 
         private EcsFilterInject<Inc<UnitComponent
-            , AttackCommand>>
+            , AttackCommand>, Exc<IsActive>>
             _attackUnitFilter = default;
 
         private EcsPoolInject<AttackCommand> _attackCommandPool = default;
@@ -27,7 +27,8 @@ namespace Assets.Code.Systems
             foreach (var entity in _attackUnitFilter.Value)
             {
 
-                Configs.AnimationTrack nextAnimation = Configs.AnimationTrack.attack1;
+                Configs.AnimationTrack nextAnimation = 
+                    Configs.AnimationTrack.attack1;
 
                 _animationService.Value.StartAnimation(
                         entity, nextAnimation, false,

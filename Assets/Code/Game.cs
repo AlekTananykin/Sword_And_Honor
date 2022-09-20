@@ -1,6 +1,7 @@
 using Asserts.Code;
 using Assets.Code.ECS.Systems.Init;
 using Assets.Code.Fabrics;
+using Assets.Code.Interfaces;
 using Assets.Code.Pools;
 using Assets.Code.Services;
 using Assets.Code.Systems;
@@ -9,7 +10,6 @@ using Assets.Code.Systems.Player;
 using Assets.Code.Systems.PlayerInput.PC;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using System;
 using UnityEngine;
 
 namespace Assets.Code
@@ -23,21 +23,13 @@ namespace Assets.Code
             var world = new EcsWorld();
             _systems = new EcsSystems(world);
 
-            AddSystems(_systems);
-            InjectServices(_systems);
+            var objectsPool =
+               new VariousObjectsPool(new GameObjectsFabric());
 
-            LoadingServices(_systems);
+            AddSystems(_systems);
+            InjectServices(_systems, objectsPool);
 
             _systems.Init();
-        }
-
-        private void LoadingServices(EcsSystems systems)
-        {
-            new PlatformsLoaderService(
-                Identifiers.PlatformsConfigPath, _systems);
-
-            new EnemyLoadService(
-                Identifiers.EnemiesLocationConfigPath, _systems);
         }
 
         private void Update()
@@ -56,14 +48,17 @@ namespace Assets.Code
         {
             new PcInputSystemsAdder(systems);
 
+            AddInitSystems(systems);
+            AddRunSystems(systems);
+        }
+
+        private void AddRunSystems(EcsSystems systems)
+        {
             systems
                 .Add(new TimeSystem())
 #if UNITY_EDITOR
                 .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
-                .Add(new PlayerInitSystem())
-                .Add(new PlatformsInitSystem())
-
                 .Add(new UnitWalkSystem())
                 .Add(new UnitJumpSystem())
                 .Add(new UnitAttackSystem())
@@ -77,15 +72,33 @@ namespace Assets.Code
                 ;
         }
 
-        private void InjectServices(EcsSystems systems)
+        private void AddInitSystems(EcsSystems systems)
         {
+            systems
+                .Add(new PlayerInitSystem())
+                .Add(new PlatformsInitSystem(
+                    Identifiers.PlatformsConfigPath))
+                .Add(new EnemiesInitSystem(
+                    Identifiers.EnemiesLocationConfigPath))
+                ;
+        }
+
+        private void InjectServices(EcsSystems systems, 
+            IVariousObjectsPool objectsPool)
+        {
+            var animationService  = new ControlAnimationService(systems);
+
+            var unitInitService = 
+                new UnitInitService(systems, animationService, objectsPool);
+
             systems.Inject(
                   new TimeService()
                 , new ControlSoundService(systems)
-                , new ControlAnimationService(systems)
+                , animationService
                 , new DamageService(systems)
                 , new RendererFlipService(systems)
-                , new VariousObjectsPool(new GameObjectsFabric())
+                , objectsPool
+                , unitInitService
                 );
         }
     }

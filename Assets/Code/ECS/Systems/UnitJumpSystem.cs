@@ -1,6 +1,6 @@
 ﻿using Asserts.Code;
-using Assets.Code.Components;
-using Assets.Code.Components.Commands;
+using Assets.Code.ECS.Components;
+using Assets.Code.ECS.Components.Commands;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -39,7 +39,8 @@ namespace Assets.Code.Systems
         private EcsCustomInject<IControlAnimationService>
             _animationService = default;
 
-        private EcsFilterInject<Inc<UnitComponent, JumpCommand>>
+        private EcsFilterInject<Inc<UnitComponent, JumpCommand>, 
+            Exc<IsActive>>
             _jumpUnitFilter = default;
     }
 }

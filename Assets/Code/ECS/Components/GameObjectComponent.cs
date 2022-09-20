@@ -2,8 +2,8 @@
 
 namespace Assets.Code.ECS.Components
 {
-    public struct UnitSoundComponent
+    struct GameObjectComponent
     {
-        public AudioSource AudioPlayer;
+        public GameObject Instance;
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Asserts.Code;
-using Assets.Code.Components;
+using Assets.Code.ECS.Components;
 using Assets.Code.Configs;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
@@ -23,14 +23,16 @@ namespace Assets.Code.Systems
                     if (AnimationTrack.walk == currentTrack)
                     {
                         _animationService.Value.StartAnimation(
-                            entity, AnimationTrack.idle, true, Identifiers.UnitAnimationSpeed);
+                            entity, AnimationTrack.idle, true, 
+                            Identifiers.UnitAnimationSpeed);
                     }
                 }
             }
         }
         
         private EcsFilterInject<
-            Inc<UnitComponent, AnimationContextComponent>> _units = default;
+            Inc<UnitComponent, AnimationContextComponent>, 
+            Exc<IsActive>> _units = default;
 
         private EcsCustomInject<ControlAnimationService> 
             _animationService = default;

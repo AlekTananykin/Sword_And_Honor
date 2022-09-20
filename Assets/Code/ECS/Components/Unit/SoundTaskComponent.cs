@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Code.Components.Unit
+namespace Assets.Code.ECS.Components.Unit
 {
     public struct SoundTaskComponent
     {

@@ -1,29 +1,47 @@
 ﻿using Assets.Code.ECS.Components;
-using Assets.Code.ECS.Components.Init;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using UnityEngine;
 
 namespace Assets.Code.ECS.Systems.Init
 {
-    sealed class PlatformsInitSystem : IEcsInitSystem
+    sealed class PlatformsInitSystem: IEcsInitSystem
     {
-        EcsFilterInject<Inc<GameObjectData, IsPlatform>> _platforms = default;
-        EcsCustomInject<IVariousObjectsPool> _pool = default;
+        public PlatformsInitSystem(string pathToConfig)
+        {
+            _pathToConfig = pathToConfig;
+        }
 
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
 
-            foreach (var platformEntity in _platforms.Value)
+            var budPool = world.GetPool<Bud>();
+            var gameObjectPool = world.GetPool<GameObjectComponent>();
+
+            var platformsConfig =
+                Resources.Load<PlatformsLocationConfig>(_pathToConfig);
+
+            for (int i = 0; i < platformsConfig.Count; ++i)
             {
-                var platform = _platforms.Pools.Inc1.Get(platformEntity);
+                var platformData = platformsConfig[i];
+                int entity = world.NewEntity();
 
-                var platformGameObject = _pool.Value.GetGameObject(platform.Path);
-                platformGameObject.transform.position = platform.Position;
+                var platformGameObject = 
+                    _pool.Value.GetGameObject(platformData.Path);
+                platformGameObject.transform.position = platformData.Position;
 
-                world.DelEntity(platformEntity);
+                ref var poolBud = ref budPool.Add(entity);
+                poolBud = platformData;
+
+                gameObjectPool.Add(entity).Instance = platformGameObject;
             }
         }
+
+        EcsCustomInject<IVariousObjectsPool> _pool = default;
+        
+
+        private string _pathToConfig = default;
     }
 }

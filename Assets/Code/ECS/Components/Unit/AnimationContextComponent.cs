@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static Assets.Code.Configs.SpriteAnimationConfig;
 
-namespace Assets.Code.Components
+namespace Assets.Code.ECS.Components
 {
     public struct AnimationContextComponent
     {

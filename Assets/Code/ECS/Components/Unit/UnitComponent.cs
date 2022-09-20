@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-namespace Assets.Code.Components
+namespace Assets.Code.ECS.Components
 {
     public struct UnitComponent
     {

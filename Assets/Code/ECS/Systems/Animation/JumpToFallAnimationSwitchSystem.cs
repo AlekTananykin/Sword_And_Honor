@@ -1,4 +1,4 @@
-﻿using Assets.Code.Components;
+﻿using Assets.Code.ECS.Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
@@ -7,7 +7,8 @@ namespace Assets.Code.Systems.Animation
     class JumpToFallAnimationSwitchSystem : IEcsRunSystem
     {
         private EcsCustomInject<ControlAnimationService> _unimationService = default;
-        private EcsFilterInject<Inc<JumpComponent, UnitComponent>> _jumpUnits = default;
+        private EcsFilterInject<Inc<JumpComponent, UnitComponent>, 
+            Exc<IsActive>> _jumpUnits = default;
 
         private EcsPoolInject<UnitComponent> _unitPool = default;
         private EcsPoolInject<JumpComponent> _JumpPool = default;

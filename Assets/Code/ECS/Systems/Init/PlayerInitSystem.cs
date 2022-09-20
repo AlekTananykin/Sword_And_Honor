@@ -1,5 +1,5 @@
 ﻿using Asserts.Code;
-using Assets.Code.Components;
+using Assets.Code.ECS.Components;
 using Assets.Code.Fabrics;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;

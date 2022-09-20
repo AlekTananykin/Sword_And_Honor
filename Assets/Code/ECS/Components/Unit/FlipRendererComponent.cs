@@ -1,5 +1,5 @@
 ﻿
-namespace Assets.Code.Components
+namespace Assets.Code.ECS.Components
 {
     public struct FlipRendererComponent
     {

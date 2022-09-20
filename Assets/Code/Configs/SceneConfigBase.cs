@@ -8,7 +8,7 @@ namespace Assets.Code.Configs
     public class SceneConfigBase<TargetMarkers>: ScriptableObject
         where TargetMarkers: MonoBehaviour
     {
-        public GameObjectData this[int index]
+        public Bud this[int index]
         {
             get
             {
@@ -21,11 +21,11 @@ namespace Assets.Code.Configs
         public object Current => throw new NotImplementedException();
 
         [SerializeField]
-        private GameObjectData[] _targets = default;
+        private Bud[] _targets = default;
 
         protected void AddTargets(TargetMarkers[] targetMarkers)
         {
-            _targets = new GameObjectData[targetMarkers.Length];
+            _targets = new Bud[targetMarkers.Length];
             for (int i = 0; i < targetMarkers.Length; ++i)
             {
                 _targets[i].Position =

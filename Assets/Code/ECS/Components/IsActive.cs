@@ -1,6 +1,6 @@
 ﻿namespace Assets.Code.ECS.Components
 {
-    public struct JumpComponent
+    public struct IsActive
     {
     }
 }

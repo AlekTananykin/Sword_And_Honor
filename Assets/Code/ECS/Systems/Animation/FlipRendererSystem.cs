@@ -1,4 +1,4 @@
-﻿using Assets.Code.Components;
+﻿using Assets.Code.ECS.Components;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
@@ -12,7 +12,8 @@ namespace Assets.Code.Systems.Animation
         private EcsPoolInject<AnimationContextComponent> 
             _animationTaskPool = default;
 
-        private EcsFilterInject<Inc<FlipRendererComponent, AnimationContextComponent>>
+        private EcsFilterInject<Inc<FlipRendererComponent, AnimationContextComponent>, 
+            Exc<IsActive>>
             _flipFilter = default;
 
         public void Run(IEcsSystems systems)

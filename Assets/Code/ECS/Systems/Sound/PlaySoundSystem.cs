@@ -1,13 +1,12 @@
-using Assets.Code.Components;
-using Assets.Code.Components.Unit;
+using Assets.Code.ECS.Components;
+using Assets.Code.ECS.Components.Unit;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 
 public sealed class PlaySoundSystem : IEcsRunSystem
 {
-    private EcsFilterInject<Inc<SoundTaskComponent, UnitSoundComponent>> 
-        _soundTaskFilter = default;
-
+    private EcsFilterInject<Inc<SoundTaskComponent, UnitSoundComponent>, 
+        Exc<IsActive>> _soundTaskFilter = default;
 
     public void Run(IEcsSystems systems)
     {
@@ -21,16 +20,14 @@ public sealed class PlaySoundSystem : IEcsRunSystem
             }
 
             ref var unitSound = ref _soundTaskFilter.Pools.Inc2.Get(unitEntity);
-            var player = unitSound.AudioPlayer;
+            var audioPlayer = unitSound.AudioPlayer;
 
-            
-
-            if (player.isPlaying)
+            if (audioPlayer.isPlaying)
                 continue;
 
-            player.loop = soundTask.IsLoop;
-            player.clip = soundTask.Clip;
-            player.Play();
+            audioPlayer.loop = soundTask.IsLoop;
+            audioPlayer.clip = soundTask.Clip;
+            audioPlayer.Play();
 
             soundTask.Clip = null;
             _soundTaskFilter.Pools.Inc1.Del(unitEntity);

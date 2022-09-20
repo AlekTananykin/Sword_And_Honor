@@ -1,6 +1,6 @@
 ﻿using Asserts.Code;
-using Assets.Code.Components;
-using Assets.Code.Components.Commands;
+using Assets.Code.ECS.Components;
+using Assets.Code.ECS.Components.Commands;
 using Assets.Code.Services;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
@@ -44,6 +44,6 @@ namespace Assets.Code.Systems
         private EcsCustomInject<ControlAnimationService> _animationService = default;
 
         private EcsFilterInject<Inc<UnitComponent, MoveCommand>,
-            Exc<JumpCommand>> _moveUnitFilter = default;
+            Exc<JumpCommand, IsActive>> _moveUnitFilter = default;
     }
 }
