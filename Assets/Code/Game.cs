@@ -46,14 +46,14 @@ namespace Assets.Code
 
         void AddSystems(EcsSystems systems)
         {
-            new PcInputSystemsAdder(systems);
-
             AddInitSystems(systems);
             AddRunSystems(systems);
         }
 
         private void AddRunSystems(EcsSystems systems)
         {
+            new PcInputSystemsAdder(systems);
+
             systems
                 .Add(new TimeSystem())
 #if UNITY_EDITOR

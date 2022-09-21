@@ -25,7 +25,7 @@ namespace Assets.Code.Systems
                 {
                     _animationService.Value.StartAnimation(
                                    unitEntity, AnimationTrack.idle, 
-                                   false, Identifiers.UnitAnimationSpeed);
+                                   true, Identifiers.UnitAnimationSpeed);
                 }
             }
         }

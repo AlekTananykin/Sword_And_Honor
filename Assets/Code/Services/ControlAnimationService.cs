@@ -61,7 +61,7 @@ namespace Assets.Code.Systems.Animation
                 animationContext.SpriteRenderer = 
                     unitAnimationComponent.SpriteRenderer;
                 
-                animationContext.Counter = 0;
+                animationContext.Counter = 0.0f;
             }
         }
 
