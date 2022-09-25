@@ -12,9 +12,9 @@ namespace Assets.Code.Systems.PlayerInput.PC
         readonly private EcsFilterInject<Inc<
             UnitComponent
             , IsControlledByPlayerComponent
-            >, Exc<AttackCommand>> _units = default;
+            >, Exc<MeleeCommand>> _units = default;
 
-        readonly private EcsPoolInject<AttackCommand>
+        readonly private EcsPoolInject<MeleeCommand>
             _attackCommandPool = default;
 
         public void Run(IEcsSystems systems)

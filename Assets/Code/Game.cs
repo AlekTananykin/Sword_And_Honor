@@ -61,7 +61,7 @@ namespace Assets.Code
 #endif
                 .Add(new UnitWalkSystem())
                 .Add(new UnitJumpSystem())
-                .Add(new UnitAttackSystem())
+                .Add(new MeleeSystem())
                 .Add(new StopWalkSystem())
                 .Add(new FallAfterWalkSystem())
 

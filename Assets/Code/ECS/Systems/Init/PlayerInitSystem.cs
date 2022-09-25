@@ -14,7 +14,7 @@ namespace Assets.Code.Systems.Player
         EcsPoolInject<UnitAnimationComponent> _unitAnimationPool = default;
 
         EcsPoolInject<UnitSoundComponent> _unitSoundPool = default;
-        EcsPoolInject<AttackComponent> _attackPool = default;
+        EcsPoolInject<MelleeComponent> _attackPool = default;
         EcsPoolInject<HealthComponent> _healthPool = default;
       
         EcsPoolInject<IsControlledByPlayerComponent> 

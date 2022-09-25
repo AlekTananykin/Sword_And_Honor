@@ -1,4 +1,5 @@
-﻿using Assets.Code.ECS.Components;
+﻿using Asserts.Code;
+using Assets.Code.ECS.Components;
 using Assets.Code.ECS.Components.Commands;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
@@ -6,55 +7,52 @@ using Leopotam.EcsLite.Di;
 
 namespace Assets.Code.Systems
 {
-    public sealed class UnitAttackSystem : IEcsRunSystem
+    public sealed class MeleeSystem : IEcsRunSystem
     {
         private EcsCustomInject<IControlAnimationService> 
             _animationService = default;
 
         private EcsFilterInject<Inc<UnitComponent
-            , AttackCommand>, Exc<IsActive>>
+            , MeleeCommand>, Exc<IsActive>>
             _attackUnitFilter = default;
 
-        private EcsPoolInject<AttackCommand> _attackCommandPool = default;
-        private EcsPoolInject<AttackComponent> _attackPool = default;
+        private EcsPoolInject<MeleeCommand> _attackCommandPool = default;
+        private EcsPoolInject<MelleeComponent> _attackPool = default;
 
-        private EcsPoolInject<UnitComponent> _unitsPool = default;
+        private EcsPoolInject<HealthChangeComponent> _healthChangePool = default;
 
-        private EcsPoolInject<HealthComponent> _healthPool = default;
+        private EcsWorldInject _world;
 
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _attackUnitFilter.Value)
             {
-
-                Configs.AnimationTrack nextAnimation = 
+                Configs.AnimationTrack nextAnimation =
                     Configs.AnimationTrack.attack1;
 
                 _animationService.Value.StartAnimation(
                         entity, nextAnimation, false,
                         Asserts.Code.Identifiers.UnitAnimationSpeed);
 
-                    Attack(entity);
-              
+                Attack(entity);
+
                 _attackCommandPool.Value.Del(entity);
             }
         }
 
         private void Attack(int unitEntity)
         {
-            ref var unit = ref _unitsPool.Value.Get(unitEntity);
             ref var attackComponent = ref _attackPool.Value.Get(unitEntity);
 
             int targetEntity = attackComponent.Attak.Attack();
             if (-1 == targetEntity)
                 return;
 
+            int damageEntity = _world.Value.NewEntity();
+            ref var healthChange = ref _healthChangePool.Value.Add(damageEntity);
 
-            if (!_healthPool.Value.Has(targetEntity))
-                return;
-
-            ref var health = ref _healthPool.Value.Get(targetEntity);
-            health.Health -= unit.Avatar.DamageSize;
+            healthChange.DamageValue = -Identifiers.Damege;
+            healthChange.Target = targetEntity;
         }
     }
 }

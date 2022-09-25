@@ -11,6 +11,8 @@ namespace Asserts.Code
 
         public const float UnitAnimationSpeed = 10.0f;
 
+        public const int Damege = 5;
+
         public const string PlatformsConfigPath = 
             "Configs/SceneConfig";
         public const string EnemiesLocationConfigPath = 

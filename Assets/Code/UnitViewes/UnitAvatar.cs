@@ -15,8 +15,11 @@ public class UnitAvatar : MonoBehaviour
     [Header("Attack")]
     public float DamageSize = 5.0f;
 
-    [Header("Health")]
-    public float Health = 100.0f;
+    [Header("Health"), Range(0, 100)]
+    public int Health = 0;
+
+    [Header("Max Health"), Range(0, 1000)]
+    public int MaxHealth = 100;
 
     [Header("Animation")]
     public SpriteAnimationConfig AnimationConfig = default;
@@ -46,5 +49,4 @@ public class UnitAvatar : MonoBehaviour
         Destroy(renderer);
         return look;
     }
-
 }

@@ -19,7 +19,7 @@ namespace Assets.Code.Services
             _unitAnimationPool = _world.GetPool<UnitAnimationComponent>();
 
             _unitSoundPool = _world.GetPool<UnitSoundComponent>();
-            _attackPool = _world.GetPool<AttackComponent>();
+            _attackPool = _world.GetPool<MelleeComponent>();
             _healthPool = _world.GetPool<HealthComponent>();
 
             _gameObjectPool = _world.GetPool<GameObjectComponent>();
@@ -97,6 +97,7 @@ namespace Assets.Code.Services
         {
             ref var unitHealth = ref _healthPool.Add(unitEntity);
             unitHealth.Health = avatart.Health;
+            unitHealth.MaxHealth = avatart.MaxHealth;
         }
 
         private void GameObjectPoolInit(GameObject unitObject, int unitEntity)
@@ -110,7 +111,7 @@ namespace Assets.Code.Services
         private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
 
         private EcsPool<UnitSoundComponent> _unitSoundPool = default;
-        private EcsPool<AttackComponent> _attackPool = default;
+        private EcsPool<MelleeComponent> _attackPool = default;
         private EcsPool<HealthComponent> _healthPool = default;
 
         private EcsPool<GameObjectComponent> _gameObjectPool = default;

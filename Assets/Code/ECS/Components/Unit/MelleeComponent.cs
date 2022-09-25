@@ -1,7 +1,7 @@
 ﻿
 namespace Assets.Code.ECS.Components
 {
-    public struct AttackComponent
+    public struct MelleeComponent
     {
         public UnitAttack Attak;
     }
