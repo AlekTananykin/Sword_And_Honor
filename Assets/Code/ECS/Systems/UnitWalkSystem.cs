@@ -29,7 +29,7 @@ namespace Assets.Code.Systems
         {
             ref var command = ref _moveUnitFilter.Pools.Inc2.Get(entity);
 
-            unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
+            unit.RigidBody.AddForce(
                 new Vector2(command.Effort * unit.Avatar.StepSpeed, 0));
 
             _renderFlipService.Value.Flip(entity, command.Effort < 0.0f);

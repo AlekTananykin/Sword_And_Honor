@@ -4,7 +4,7 @@ using Leopotam.EcsLite.Di;
 
 namespace Assets.Code.ECS.Health
 {
-    sealed class DamageSystem : IEcsRunSystem
+    sealed class HealthSystem : IEcsRunSystem
     {
         public void Run(IEcsSystems systems)
         {
@@ -16,7 +16,7 @@ namespace Assets.Code.ECS.Health
                 {
                     ref var health = ref _healthPool.Get(change.Target);
 
-                    health.Health += change.DamageValue;
+                    health.Health += change.DeltaHealth;
 
                     if (health.Health < 0)
                         health.Health = 0;

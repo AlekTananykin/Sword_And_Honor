@@ -51,7 +51,7 @@ namespace Assets.Code.Systems
             int damageEntity = _world.Value.NewEntity();
             ref var healthChange = ref _healthChangePool.Value.Add(damageEntity);
 
-            healthChange.DamageValue = -Identifiers.Damege;
+            healthChange.DeltaHealth = -Identifiers.Damege;
             healthChange.Target = targetEntity;
         }
     }

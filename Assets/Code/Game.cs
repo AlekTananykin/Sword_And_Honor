@@ -1,4 +1,5 @@
 using Asserts.Code;
+using Assets.Code.ECS.Health;
 using Assets.Code.ECS.Systems.Init;
 using Assets.Code.Fabrics;
 using Assets.Code.Interfaces;
@@ -69,6 +70,7 @@ namespace Assets.Code
                 .Add(new UpdateAnimationSystem())
                 .Add(new JumpToFallAnimationSwitchSystem())
                 .Add(new PlaySoundSystem())
+                .Add(new HealthSystem())
                 ;
         }
 
@@ -95,7 +97,6 @@ namespace Assets.Code
                   new TimeService()
                 , new ControlSoundService(systems)
                 , animationService
-                , new DamageService(systems)
                 , new RendererFlipService(systems)
                 , objectsPool
                 , unitInitService

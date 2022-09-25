@@ -2,7 +2,7 @@
 {
     struct HealthChangeComponent
     {
-        public int DamageValue;
+        public int DeltaHealth;
         public int Target;
     }
 }

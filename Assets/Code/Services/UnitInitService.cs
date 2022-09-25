@@ -62,8 +62,11 @@ namespace Assets.Code.Services
             playerUnit.Avatar = avatar;
 
             unitGameObject.transform.position = position;
-            playerUnit.Transform = unitGameObject.GetComponent<Transform>();
+            
             playerUnit.RigidBody = unitGameObject.GetComponent<Rigidbody2D>();
+
+            ref var transform = ref _transformPool.Add(unitEntity);
+            transform.Transform = unitGameObject.GetComponent<Transform>();
         }
 
         private void AnimationInit(
@@ -108,6 +111,7 @@ namespace Assets.Code.Services
         private EcsWorld _world = default;
 
         private EcsPool<UnitComponent> _unitPool = default;
+        private EcsPool<TransformComponent> _transformPool = default;
         private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
 
         private EcsPool<UnitSoundComponent> _unitSoundPool = default;
