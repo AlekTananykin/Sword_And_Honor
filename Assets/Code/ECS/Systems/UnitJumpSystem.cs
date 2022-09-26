@@ -28,7 +28,7 @@ namespace Assets.Code.Systems
         {
             ref var command = ref _jumpUnitFilter.Pools.Inc2.Get(entity);
 
-            unit.Transform.gameObject.GetComponent<Rigidbody2D>().AddForce(
+            unit.RigidBody.AddForce(
                 new Vector2(0.0f, command.Effort * unit.Avatar.JumpSpeed));
 
             _animationService.Value.StartAnimation(

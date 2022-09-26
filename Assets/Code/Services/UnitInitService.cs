@@ -16,6 +16,7 @@ namespace Assets.Code.Services
             _world = systems.GetWorld();
 
             _unitPool = _world.GetPool<UnitComponent>();
+            _transformPool = _world.GetPool<TransformComponent>();
             _unitAnimationPool = _world.GetPool<UnitAnimationComponent>();
 
             _unitSoundPool = _world.GetPool<UnitSoundComponent>();
