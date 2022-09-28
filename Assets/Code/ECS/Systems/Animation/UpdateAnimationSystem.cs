@@ -1,4 +1,5 @@
 ﻿using Asserts.Code;
+using Assets.Code.ECS.Animation;
 using Assets.Code.ECS.Components;
 using Assets.Code.Services;
 using Leopotam.EcsLite;
@@ -10,21 +11,12 @@ namespace Assets.Code.Systems.Animation
     {
         public void Run(IEcsSystems systems)
         {
-            foreach (var animationEntity in _animationTaskFilterFilter.Value)
+            foreach (var animationEntity in _animationTaskFilter.Value)
             {
                 ref var animationUnit = 
-                    ref _animationTaskPool.Value.Get(animationEntity);
+                    ref _animationContextPool.Value.Get(animationEntity);
 
-                if (animationUnit.Sleeps)
-                {
-                    _animationService.Value.StartAnimation(
-                        animationEntity, Configs.AnimationTrack.idle, true, 
-                        Identifiers.UnitAnimationSpeed);
-
-                    continue;
-                }
-
-                UpdateAnimation(
+                UpdateAnimation(animationEntity,
                     _timeService.Value.DeltaTime, ref animationUnit);
 
                 var animationClip = 
@@ -37,7 +29,7 @@ namespace Assets.Code.Systems.Animation
             }
         }
         
-        private void UpdateAnimation(
+        private void UpdateAnimation(int animationEntity,
             float deltaTime, ref AnimationContextComponent unitAnimation)
         {
             unitAnimation.Counter += deltaTime * unitAnimation.Speed;
@@ -50,15 +42,17 @@ namespace Assets.Code.Systems.Animation
             else if (unitAnimation.Counter > unitAnimation.Clip.Count)
             {
                 unitAnimation.Counter = unitAnimation.Clip.Count - 1;
-                unitAnimation.Sleeps = true;
+                _isSleepPool.Value.Add(animationEntity);
             }
         }
 
         private EcsPoolInject<AnimationContextComponent>
-           _animationTaskPool = default;
+           _animationContextPool = default;
 
         private EcsFilterInject<Inc<AnimationContextComponent>, 
-            Exc<IsActive>> _animationTaskFilterFilter = default;
+            Exc<IsSleep>> _animationTaskFilter = default;
+
+        private EcsPoolInject<IsSleep> _isSleepPool = default;
 
         private readonly EcsCustomInject<TimeService> _timeService = default;
 
@@ -66,5 +60,6 @@ namespace Assets.Code.Systems.Animation
             _animationService = default;
 
         private EcsCustomInject<ControlSoundService> _soundService = default;
+
     }
 }

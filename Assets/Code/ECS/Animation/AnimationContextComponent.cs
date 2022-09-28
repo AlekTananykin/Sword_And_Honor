@@ -15,6 +15,5 @@ namespace Assets.Code.ECS.Components
         public bool Loop;
         public float Speed;
         public float Counter;
-        public bool Sleeps;
     }
 }

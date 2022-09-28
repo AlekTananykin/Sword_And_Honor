@@ -1,4 +1,5 @@
 using Asserts.Code;
+using Assets.Code.ECS.Animation;
 using Assets.Code.ECS.Death;
 using Assets.Code.ECS.Health;
 using Assets.Code.ECS.Systems.Init;
@@ -66,10 +67,12 @@ namespace Assets.Code
                 .Add(new MeleeSystem())
                 .Add(new StopWalkSystem())
                 .Add(new FallAfterWalkSystem())
+                
 
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
                 .Add(new JumpToFallAnimationSwitchSystem())
+                .Add(new SwitchSleepAnimationToIdleSystem())
                 .Add(new PlaySoundSystem())
                 .Add(new HealthSystem())
                 .Add(new DeathSystem())

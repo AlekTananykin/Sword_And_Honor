@@ -5,8 +5,8 @@ using Leopotam.EcsLite.Di;
 
 public sealed class PlaySoundSystem : IEcsRunSystem
 {
-    private EcsFilterInject<Inc<SoundTaskComponent, UnitSoundComponent>, 
-        Exc<IsActive>> _soundTaskFilter = default;
+    private EcsFilterInject<Inc<SoundTaskComponent, UnitSoundComponent>> 
+        _soundTaskFilter = default;
 
     public void Run(IEcsSystems systems)
     {

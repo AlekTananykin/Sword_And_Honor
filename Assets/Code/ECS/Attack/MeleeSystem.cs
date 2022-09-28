@@ -1,4 +1,5 @@
 ﻿using Asserts.Code;
+using Assets.Code.ECS.Animation;
 using Assets.Code.ECS.Components;
 using Assets.Code.ECS.Components.Commands;
 using Assets.Code.Interfaces;
@@ -14,13 +15,14 @@ namespace Assets.Code.Systems
             _animationService = default;
 
         private EcsFilterInject<Inc<UnitComponent
-            , MeleeCommand>, Exc<IsActive>>
+            , MeleeCommand> >
             _attackUnitFilter = default;
 
         private EcsPoolInject<MeleeCommand> _attackCommandPool = default;
         private EcsPoolInject<MelleeComponent> _attackPool = default;
 
         private EcsPoolInject<HealthChangeComponent> _healthChangePool = default;
+        private EcsPoolInject<IsNeedSwitchToIdle> _switchToIdlePool = default;
 
         private EcsWorldInject _world;
 
@@ -56,6 +58,9 @@ namespace Assets.Code.Systems
             healthChange.Target = targetEntity;
 
             Debug.Log("Delta health: " + healthChange.DeltaHealth);
+
+            if (!_switchToIdlePool.Value.Has(unitEntity))
+                _switchToIdlePool.Value.Add(unitEntity);
         }
     }
 }

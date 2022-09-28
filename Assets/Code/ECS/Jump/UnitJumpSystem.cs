@@ -39,8 +39,7 @@ namespace Assets.Code.Systems
         private EcsCustomInject<IControlAnimationService>
             _animationService = default;
 
-        private EcsFilterInject<Inc<UnitComponent, JumpCommand>, 
-            Exc<IsActive>>
+        private EcsFilterInject<Inc<UnitComponent, JumpCommand>>
             _jumpUnitFilter = default;
     }
 }

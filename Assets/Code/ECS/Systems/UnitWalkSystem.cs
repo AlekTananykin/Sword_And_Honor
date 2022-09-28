@@ -44,6 +44,6 @@ namespace Assets.Code.Systems
         private EcsCustomInject<ControlAnimationService> _animationService = default;
 
         private EcsFilterInject<Inc<UnitComponent, MoveCommand>,
-            Exc<JumpCommand, IsActive>> _moveUnitFilter = default;
+            Exc<JumpCommand>> _moveUnitFilter = default;
     }
 }

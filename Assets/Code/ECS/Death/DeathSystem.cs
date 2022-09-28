@@ -20,13 +20,17 @@ namespace Assets.Code.ECS.Death
                         Identifiers.UnitAnimationSpeed);
 
                     _healthFilter.Pools.Inc1.Del(unitEntity);
+                    _deadPool.Value.Add(unitEntity);
                 }
             }
         }
 
-        private EcsFilterInject<Inc<HealthComponent>> _healthFilter = default;
+        private EcsFilterInject<Inc<HealthComponent>, Exc<IsDead>> 
+            _healthFilter = default;
 
         private EcsCustomInject<IControlAnimationService>
             _animationService = default;
+
+        private EcsPoolInject<IsDead> _deadPool = default;
     }
 }

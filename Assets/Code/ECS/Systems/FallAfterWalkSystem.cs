@@ -31,8 +31,8 @@ namespace Assets.Code.Systems
         }
 
         private EcsFilterInject<
-           Inc<UnitComponent, AnimationContextComponent>, 
-           Exc<IsActive>> _units = default;
+           Inc<UnitComponent, AnimationContextComponent>> 
+            _units = default;
 
         private EcsCustomInject<ControlAnimationService>
             _animationService = default;

@@ -3,6 +3,7 @@ using Assets.Code.Configs;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using static Assets.Code.Configs.SpriteAnimationConfig;
+using Assets.Code.ECS.Animation;
 
 namespace Assets.Code.Systems.Animation
 {
@@ -13,6 +14,7 @@ namespace Assets.Code.Systems.Animation
             var world = systems.GetWorld();
             _animationContextPool = world.GetPool<AnimationContextComponent>();
             _unitAnimationPool = world.GetPool<UnitAnimationComponent>();
+            _sleeepPool = world.GetPool<IsSleep>();
         }
 
         public void StartAnimation(int unitEntity,
@@ -27,7 +29,8 @@ namespace Assets.Code.Systems.Animation
                 
                 if (track != animationContext.Trak)
                 {
-                    animationContext.Sleeps = false;
+                    if (_sleeepPool.Has(unitEntity))
+                        _sleeepPool.Del(unitEntity);
 
                     ref var animationComponent = ref _unitAnimationPool.Get(unitEntity);
 
@@ -46,7 +49,9 @@ namespace Assets.Code.Systems.Animation
 
                 animationContext.Loop = isLoop;
                 animationContext.Speed = speed;
-                animationContext.Sleeps = false;
+
+                if (_sleeepPool.Has(unitEntity))
+                    _sleeepPool.Del(unitEntity);
 
                 ref var unitAnimationComponent = 
                     ref _unitAnimationPool.Get(unitEntity);
@@ -77,5 +82,7 @@ namespace Assets.Code.Systems.Animation
             _animationContextPool = default;
 
         private EcsPool<UnitAnimationComponent> _unitAnimationPool = default;
+
+        private EcsPool<IsSleep> _sleeepPool = default;
     }
 }

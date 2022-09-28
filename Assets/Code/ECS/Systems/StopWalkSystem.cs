@@ -20,7 +20,9 @@ namespace Assets.Code.Systems
                     var currentTrack =
                         _units.Pools.Inc2.Get(entity).Trak;
 
-                    if (AnimationTrack.walk == currentTrack)
+                    if (AnimationTrack.walk == currentTrack ||
+                        AnimationTrack.fall == currentTrack ||
+                        AnimationTrack.jump == currentTrack)
                     {
                         _animationService.Value.StartAnimation(
                             entity, AnimationTrack.idle, true, 
@@ -31,8 +33,7 @@ namespace Assets.Code.Systems
         }
         
         private EcsFilterInject<
-            Inc<UnitComponent, AnimationContextComponent>, 
-            Exc<IsActive>> _units = default;
+            Inc<UnitComponent, AnimationContextComponent>> _units = default;
 
         private EcsCustomInject<ControlAnimationService> 
             _animationService = default;
