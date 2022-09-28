@@ -12,9 +12,9 @@ namespace Assets.Code.ECS.Health
             {
                 ref var change = ref _changePool.Pools.Inc1.Get(changeEntity);
 
-                if (_healthPool.Has(change.Target))
+                if (_healthPool.Value.Has(change.Target))
                 {
-                    ref var health = ref _healthPool.Get(change.Target);
+                    ref var health = ref _healthPool.Value.Get(change.Target);
 
                     health.Health += change.DeltaHealth;
 
@@ -29,6 +29,6 @@ namespace Assets.Code.ECS.Health
         }
 
         EcsFilterInject<Inc<HealthChangeComponent>> _changePool = default;
-        EcsPool<HealthComponent> _healthPool = default;
+        EcsPoolInject<HealthComponent> _healthPool = default;
     }
 }

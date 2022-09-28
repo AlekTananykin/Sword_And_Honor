@@ -13,6 +13,8 @@ namespace Asserts.Code
 
         public const int Damege = 5;
 
+        public const int EnemyLayer = 3;
+
         public const string PlatformsConfigPath = 
             "Configs/SceneConfig";
         public const string EnemiesLocationConfigPath = 

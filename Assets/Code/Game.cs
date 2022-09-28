@@ -1,4 +1,5 @@
 using Asserts.Code;
+using Assets.Code.ECS.Death;
 using Assets.Code.ECS.Health;
 using Assets.Code.ECS.Systems.Init;
 using Assets.Code.Fabrics;
@@ -71,6 +72,7 @@ namespace Assets.Code
                 .Add(new JumpToFallAnimationSwitchSystem())
                 .Add(new PlaySoundSystem())
                 .Add(new HealthSystem())
+                .Add(new DeathSystem())
                 ;
         }
 

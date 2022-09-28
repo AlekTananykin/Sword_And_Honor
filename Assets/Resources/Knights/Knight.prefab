@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: -1548054124839418515}
   - component: {fileID: 6597217172675134314}
   - component: {fileID: 2237604021955733861}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Knight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,6 +263,7 @@ MonoBehaviour:
   JumpSpeed: 4000
   DamageSize: 5
   Health: 100
+  MaxHealth: 100
   AnimationConfig: {fileID: 11400000, guid: da7e545cd699eaf459bdfdd95c7653fa, type: 2}
 --- !u!114 &2237604021955733861
 MonoBehaviour:

@@ -4,6 +4,7 @@ using Assets.Code.ECS.Components.Commands;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using UnityEngine;
 
 namespace Assets.Code.Systems
 {
@@ -53,6 +54,8 @@ namespace Assets.Code.Systems
 
             healthChange.DeltaHealth = -Identifiers.Damege;
             healthChange.Target = targetEntity;
+
+            Debug.Log("Delta health: " + healthChange.DeltaHealth);
         }
     }
 }
