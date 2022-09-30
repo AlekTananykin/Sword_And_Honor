@@ -97,11 +97,11 @@ namespace Assets.Code.Services
                 unitGameObject.GetComponent<UnitAttack>();
         }
 
-        private void HealthInit(UnitAvatar avatart, int unitEntity)
+        private void HealthInit(UnitAvatar avatar, int unitEntity)
         {
             ref var unitHealth = ref _healthPool.Add(unitEntity);
-            unitHealth.Health = avatart.Health;
-            unitHealth.MaxHealth = avatart.MaxHealth;
+            unitHealth.Health = avatar.Health;
+            unitHealth.MaxHealth = avatar.MaxHealth;
         }
 
         private void GameObjectPoolInit(GameObject unitObject, int unitEntity)

@@ -264,6 +264,7 @@ MonoBehaviour:
   JumpSpeed: 1000
   DamageSize: 5
   Health: 100
+  MaxHealth: 100
   AnimationConfig: {fileID: 11400000, guid: deb01b448bd9ed943bb470fcec8fa0a1, type: 2}
 --- !u!114 &1777268012548567695
 MonoBehaviour:

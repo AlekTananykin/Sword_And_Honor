@@ -10,9 +10,10 @@ namespace Sccene
     public sealed class CellView : MonoBehaviour
     {
 
+        public float XyStep = 1.0f;
 #if UNITY_EDITOR
 
-        public float XyStep = 1.0f;
+
         void Update()
         {
             if (Application.isPlaying || !transform.hasChanged)

@@ -76,6 +76,7 @@ namespace Assets.Code
                 .Add(new PlaySoundSystem())
                 .Add(new HealthSystem())
                 .Add(new DeathSystem())
+                .Add(new CleanerSystem())
                 ;
         }
 

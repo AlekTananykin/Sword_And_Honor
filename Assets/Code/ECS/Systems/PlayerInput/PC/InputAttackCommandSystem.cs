@@ -17,13 +17,22 @@ namespace Assets.Code.Systems.PlayerInput.PC
         readonly private EcsPoolInject<MeleeCommand>
             _attackCommandPool = default;
 
+        bool _isButtonDown = false;
+
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _units.Value)
             {
                 float attackEffort = Input.GetAxisRaw(Identifiers.Attack);
                 if (0 != attackEffort)
-                    _attackCommandPool.Value.Add(entity);
+                {
+                    if (!_isButtonDown)
+                        _attackCommandPool.Value.Add(entity);
+                    
+                    _isButtonDown = true;
+                }
+                else
+                    _isButtonDown = false;
             }
         }
     }

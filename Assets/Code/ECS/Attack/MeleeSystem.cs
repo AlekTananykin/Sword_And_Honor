@@ -24,7 +24,7 @@ namespace Assets.Code.Systems
         private EcsPoolInject<HealthChangeComponent> _healthChangePool = default;
         private EcsPoolInject<IsNeedSwitchToIdle> _switchToIdlePool = default;
 
-        private EcsWorldInject _world;
+        private EcsWorldInject _world = default;
 
         public void Run(IEcsSystems systems)
         {
@@ -36,6 +36,10 @@ namespace Assets.Code.Systems
                 _animationService.Value.StartAnimation(
                         entity, nextAnimation, false,
                         Asserts.Code.Identifiers.UnitAnimationSpeed);
+
+                if (!_switchToIdlePool.Value.Has(entity))
+                    _switchToIdlePool.Value.Add(entity);
+
 
                 Attack(entity);
 
@@ -57,10 +61,6 @@ namespace Assets.Code.Systems
             healthChange.DeltaHealth = -Identifiers.Damege;
             healthChange.Target = targetEntity;
 
-            Debug.Log("Delta health: " + healthChange.DeltaHealth);
-
-            if (!_switchToIdlePool.Value.Has(unitEntity))
-                _switchToIdlePool.Value.Add(unitEntity);
         }
     }
 }
