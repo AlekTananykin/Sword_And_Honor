@@ -23,6 +23,9 @@ namespace Asserts.Code
             "Configs/TrapsLocationConfig";
         public const string GiftsLocationConfigPath =
             "Configs/GiftsLocationConfig";
+
+        public const string MinusFiveView =
+            "MinusDigits/MinusFive";
     }
 
     public static class PrefabPathes

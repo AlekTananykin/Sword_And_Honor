@@ -1,11 +1,11 @@
 ﻿using Asserts.Code;
 using Assets.Code.ECS.Animation;
+using Assets.Code.ECS.Attack.HealthLoss;
 using Assets.Code.ECS.Components;
 using Assets.Code.ECS.Components.Commands;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
 
 namespace Assets.Code.Systems
 {
@@ -23,6 +23,8 @@ namespace Assets.Code.Systems
 
         private EcsPoolInject<HealthChangeComponent> _healthChangePool = default;
         private EcsPoolInject<IsNeedSwitchToIdle> _switchToIdlePool = default;
+
+        private EcsPoolInject<HealthLoss> _healthLossPool = default;
 
         private EcsWorldInject _world = default;
 
@@ -52,15 +54,28 @@ namespace Assets.Code.Systems
             ref var attackComponent = ref _attackPool.Value.Get(unitEntity);
 
             int targetEntity = attackComponent.Attak.Attack();
-            if (-1 == targetEntity)
+            if (0 > targetEntity)
                 return;
 
+            DecreaseHealth(targetEntity);
+            ShowHealthLoss(targetEntity);
+        }
+
+        private void ShowHealthLoss(int targetEntity)
+        {
+            int healthLossEntity = _world.Value.NewEntity();
+            ref var healthLoss = ref _healthLossPool.Value.Add(healthLossEntity);
+            healthLoss.TargetEntity = targetEntity;
+            healthLoss.LossViewPrefabPath = Identifiers.MinusFiveView;
+        }
+
+        private void DecreaseHealth(int targetEntity)
+        {
             int damageEntity = _world.Value.NewEntity();
             ref var healthChange = ref _healthChangePool.Value.Add(damageEntity);
 
             healthChange.DeltaHealth = -Identifiers.Damege;
             healthChange.Target = targetEntity;
-
         }
     }
 }

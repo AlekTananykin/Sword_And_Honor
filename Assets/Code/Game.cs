@@ -1,8 +1,11 @@
 using Asserts.Code;
 using Assets.Code.ECS.Animation;
+using Assets.Code.ECS.Attack.HealthLoss;
 using Assets.Code.ECS.Death;
 using Assets.Code.ECS.Health;
 using Assets.Code.ECS.Systems.Init;
+using Assets.Code.ECS.Teleport;
+using Assets.Code.ECS.Timer;
 using Assets.Code.Fabrics;
 using Assets.Code.Interfaces;
 using Assets.Code.Pools;
@@ -67,7 +70,10 @@ namespace Assets.Code
                 .Add(new MeleeSystem())
                 .Add(new StopWalkSystem())
                 .Add(new FallAfterWalkSystem())
-                
+
+                .Add(new TeleportSystem())
+                .Add(new ScaleSystem())
+                .Add(new TimerSystem())
 
                 .Add(new FlipRendererSystem())
                 .Add(new UpdateAnimationSystem())
@@ -77,6 +83,9 @@ namespace Assets.Code
                 .Add(new HealthSystem())
                 .Add(new DeathSystem())
                 .Add(new CleanerSystem())
+
+                .Add(new HealthLossInitViewSystem())
+                .Add(new HealthLossDestroyViewSystem())
                 ;
         }
 
