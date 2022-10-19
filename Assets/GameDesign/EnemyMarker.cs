@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Code.SceneData
 {
-    class EnemyMarker: MonoBehaviour
+    public class EnemyMarker: MonoBehaviour
     {
     }
 }

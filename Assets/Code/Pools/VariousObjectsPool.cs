@@ -20,6 +20,7 @@ namespace Assets.Code.Pools
             }
 
             var instance = pool.GetGameObject();
+            instance.name = prefabPath;
             _objectPoolMap.Add(instance, pool);
 
             return instance;
@@ -30,7 +31,7 @@ namespace Assets.Code.Pools
             if (!_objectPoolMap.TryGetValue(item, out SimplePool pool))
             {
                 Debug.LogError(
-                    "Various ObjectsPool.Intake>> wronk intaking object");
+                    "Various ObjectsPool.Intake>> wrong intaking object");
             }
             _objectPoolMap.Remove(item);
             pool.Intake(ref item);

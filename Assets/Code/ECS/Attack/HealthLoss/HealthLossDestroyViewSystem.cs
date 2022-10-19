@@ -10,13 +10,17 @@ namespace Assets.Code.ECS.Attack.HealthLoss
     {
         public void Run(IEcsSystems systems)
         {
+            var world = systems.GetWorld();
+
             foreach (var entity in _healthLossFilter.Value)
             {
                 var gameObject = _healthLossFilter.
                     Pools.Inc3.Get(entity).Instance;
 
-                gameObject.active = false;
+                gameObject.SetActive(false);
                 _objectsPool.Value.Intake(ref gameObject);
+
+                world.DelEntity(entity);
             }
         }
 

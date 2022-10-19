@@ -1,5 +1,4 @@
-﻿using Asserts.Code;
-using Assets.Code.ECS.Animation;
+﻿using Assets.Code.ECS.Animation;
 using Assets.Code.ECS.Components;
 using Assets.Code.Services;
 using Leopotam.EcsLite;
@@ -56,10 +55,6 @@ namespace Assets.Code.Systems.Animation
 
         private readonly EcsCustomInject<TimeService> _timeService = default;
 
-        private EcsCustomInject<ControlAnimationService> 
-            _animationService = default;
-
         private EcsCustomInject<ControlSoundService> _soundService = default;
-
     }
 }

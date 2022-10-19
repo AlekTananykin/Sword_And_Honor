@@ -62,9 +62,7 @@ namespace Assets.Code
 
             systems
                 .Add(new TimeSystem())
-#if UNITY_EDITOR
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
-#endif
+
                 .Add(new UnitWalkSystem())
                 .Add(new UnitJumpSystem())
                 .Add(new MeleeSystem())

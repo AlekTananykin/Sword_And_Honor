@@ -27,9 +27,6 @@ namespace Assets.Code.ECS.Death
         private EcsFilterInject<Inc<IsDead, IsSleep, 
             GameObjectComponent>> _readyFilter = default;
 
-        private EcsCustomInject<IUnitInitService>
-            _unitInitService = default;
-
         private EcsCustomInject<IVariousObjectsPool> _objectsPool = default;
     }
 }

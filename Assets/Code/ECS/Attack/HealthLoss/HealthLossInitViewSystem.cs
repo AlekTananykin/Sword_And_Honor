@@ -6,6 +6,7 @@ using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using System;
+using UnityEngine;
 
 namespace Assets.Code.ECS.Attack.HealthLoss
 {
@@ -13,28 +14,37 @@ namespace Assets.Code.ECS.Attack.HealthLoss
     {
         public void Run(IEcsSystems systems)
         {
-            foreach (var entity in _healthLossFilter.Value)
+            foreach (var digitEntity in _healthLossFilter.Value)
             {
-                ref var healthLoss = ref _healthLossFilter.Pools.Inc1.Get(entity);
+                ref var healthLoss = ref _healthLossFilter.Pools.Inc1.Get(digitEntity);
 
                 var digitView = _gameObjectsCreater.Value.GetGameObject(
                     healthLoss.LossViewPrefabPath);
 
-                _objectPool.Value.Add(entity).Instance = digitView;
+                _objectPool.Value.Add(digitEntity).Instance = digitView;
 
-                ref var transform = ref _transformPool.Value.Add(entity);
-                transform.Transform = digitView.transform;
+                SetPosition(ref healthLoss, digitEntity, digitView);
 
-                ref var teleport = ref _teleportPool.Value.Add(entity);
+                ref var teleport = ref _teleportPool.Value.Add(digitEntity);
                 teleport.Velocity = new UnityEngine.Vector3(0.0f, 0.2f, 0.0f);
 
-                ref var scale = ref _scalePool.Value.Add(entity);
-                scale.ScaleSpeed = 0.5f;
+                ref var scale = ref _scalePool.Value.Add(digitEntity);
+                scale.ScaleSpeed = 0.1f;
                 digitView.transform.localScale = new UnityEngine.Vector3(0.1f, 0.1f, 1f);
 
-                ref var timer = ref _timerPool.Value.Add(entity);
+                ref var timer = ref _timerPool.Value.Add(digitEntity);
                 timer.Timer = 5.0f;
+
+                digitView.SetActive(true);
             }
+        }
+
+        private void SetPosition(ref HealthLoss healthLoss, 
+            int digitEntity, GameObject digitView)
+        {
+            ref var digitTransform = ref _transformPool.Value.Add(digitEntity);
+            digitTransform.Transform = digitView.transform;
+            digitTransform.Transform.position = healthLoss.InitPosition;
         }
 
         private EcsFilterInject<Inc<HealthLoss>, 

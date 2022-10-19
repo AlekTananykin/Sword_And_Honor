@@ -24,6 +24,8 @@ namespace Assets.Code.Systems
         private EcsPoolInject<HealthChangeComponent> _healthChangePool = default;
         private EcsPoolInject<IsNeedSwitchToIdle> _switchToIdlePool = default;
 
+        private EcsPoolInject<TransformComponent> _transformPool = default;
+
         private EcsPoolInject<HealthLoss> _healthLossPool = default;
 
         private EcsWorldInject _world = default;
@@ -65,8 +67,11 @@ namespace Assets.Code.Systems
         {
             int healthLossEntity = _world.Value.NewEntity();
             ref var healthLoss = ref _healthLossPool.Value.Add(healthLossEntity);
-            healthLoss.TargetEntity = targetEntity;
             healthLoss.LossViewPrefabPath = Identifiers.MinusFiveView;
+
+            ref var targetObject = ref _transformPool.Value.Get(targetEntity);
+
+            healthLoss.InitPosition = targetObject.Transform.position;
         }
 
         private void DecreaseHealth(int targetEntity)
