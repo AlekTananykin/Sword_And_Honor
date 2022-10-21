@@ -13,7 +13,7 @@ namespace Asserts.Code
 
         public const int Damege = 5;
 
-        public const int EnemyLayer = 3;
+
 
         public const string PlatformsConfigPath = 
             "Configs/SceneConfig";
@@ -28,12 +28,20 @@ namespace Asserts.Code
             "MinusDigits/MinusFive";
     }
 
+    public static class GameLayers
+    {
+        public const int EnemyLayer = 3;
+        public const int PlayerLayer = 6;
+
+        public const int EnemyLayerMask = 1 << EnemyLayer;
+        public const int PlayerLayerMask = 1 << PlayerLayer;
+    }
+
     public static class PrefabPathes
     {
         public const string DragonPrefabPath = "Dragon";
         public const string KnightPrefabPath = "Knight";
         public const string ChestPrefabPath = "Chest";
-
     }
 
     public enum CharacterType { Dragon }

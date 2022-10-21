@@ -15,17 +15,13 @@ namespace Assets.Code.Units
         [SerializeField]
         private float _attackDamage;
 
+
         public override int Attack()
         {
             var hit = Physics2D.Raycast(
                 new Vector2(gameObject.transform.position.x,
                 gameObject.transform.position.y + 1f) + _attackRayPosition, 
-                Vector2.right, _attackDistance, Identifiers.EnemyLayer);
-
-            var v = new Vector2(gameObject.transform.position.x,
-               gameObject.transform.position.y + 1f) + _attackRayPosition;
-
-            Debug.DrawLine(v, v + Vector2.right * _attackDistance, Color.red);
+                Vector2.right, _attackDistance, GameLayers.EnemyLayerMask);
 
             if (null != hit.collider 
                 && hit.collider.gameObject.TryGetComponent(out UnitAvatar target))
