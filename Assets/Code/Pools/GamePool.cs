@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Assets.Code.Pools
 {
-    public class GamePool
+    internal class GamePool
     {
         protected GamePool(IGameObjectFabric fabric, string pathToGameObject)
         {
