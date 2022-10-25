@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Asserts.Code
 {
     public static class Identifiers
@@ -12,8 +14,6 @@ namespace Asserts.Code
         public const float UnitAnimationSpeed = 10.0f;
 
         public const int Damege = 5;
-
-
 
         public const string PlatformsConfigPath = 
             "Configs/SceneConfig";
@@ -32,6 +32,26 @@ namespace Asserts.Code
     {
         public const int EnemyLayer = 3;
         public const int PlayerLayer = 6;
+
+        public static int GetTargetMaskByLayer(int layer)
+        {
+            switch (layer)
+            {
+                case PlayerLayer:
+                    {
+                        return EnemyLayerMask;
+                    }
+                case EnemyLayer:
+                    {
+                        return PlayerLayerMask;
+                    }
+                default:
+                    {
+                        Debug.LogError($"Unknown layer: {layer}");
+                        return 0;
+                    }
+             }
+        }
 
         public const int EnemyLayerMask = 1 << EnemyLayer;
         public const int PlayerLayerMask = 1 << PlayerLayer;

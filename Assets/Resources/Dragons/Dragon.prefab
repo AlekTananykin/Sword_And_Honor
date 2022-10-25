@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 520409083243086223}
   - component: {fileID: 1777268012548567695}
   - component: {fileID: -1631248572871247568}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Dragon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,6 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ef0ae9041161145a67cae1e5a14658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attackDistance: 1
-  _attackRayPosition: {x: 0, y: 0}
-  _attackDamage: 0
+  AttackDistance: 1
+  AttackRayPosition: {x: 0, y: 0}
+  AttackDamage: 0

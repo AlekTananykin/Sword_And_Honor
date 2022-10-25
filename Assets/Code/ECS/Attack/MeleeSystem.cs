@@ -3,6 +3,7 @@ using Assets.Code.ECS.Animation;
 using Assets.Code.ECS.Attack.HealthLoss;
 using Assets.Code.ECS.Components;
 using Assets.Code.ECS.Components.Commands;
+using Assets.Code.ECS.Components.Unit;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -15,7 +16,7 @@ namespace Assets.Code.Systems
             _animationService = default;
 
         private EcsFilterInject<Inc<UnitComponent
-            , MeleeCommand> >
+            , MeleeCommand, UnitDirectionComponent> >
             _attackUnitFilter = default;
 
         private EcsPoolInject<MeleeCommand> _attackCommandPool = default;
@@ -27,6 +28,8 @@ namespace Assets.Code.Systems
         private EcsPoolInject<TransformComponent> _transformPool = default;
 
         private EcsPoolInject<HealthLoss> _healthLossPool = default;
+
+        private EcsPoolInject<UnitDirectionComponent> _directionPool = default;
 
         private EcsWorldInject _world = default;
 
@@ -54,8 +57,11 @@ namespace Assets.Code.Systems
         private void Attack(int unitEntity)
         {
             ref var attackComponent = ref _attackPool.Value.Get(unitEntity);
+            ref var direction = ref _directionPool.Value.Get(unitEntity);
 
-            int targetEntity = attackComponent.Attak.Attack();
+            int targetEntity = 
+                attackComponent.Attak.Attack(direction.ToTheLeft);
+
             if (0 > targetEntity)
                 return;
 

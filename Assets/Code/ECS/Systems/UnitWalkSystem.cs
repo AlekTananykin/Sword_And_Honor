@@ -1,6 +1,7 @@
 ﻿using Asserts.Code;
 using Assets.Code.ECS.Components;
 using Assets.Code.ECS.Components.Commands;
+using Assets.Code.ECS.Components.Unit;
 using Assets.Code.Services;
 using Assets.Code.Systems.Animation;
 using Leopotam.EcsLite;
@@ -32,18 +33,20 @@ namespace Assets.Code.Systems
             unit.RigidBody.AddForce(
                 new Vector2(command.Effort * unit.Avatar.StepSpeed, 0));
 
-            _renderFlipService.Value.Flip(entity, command.Effort < 0.0f);
+            bool direction = command.Effort < 0.0f;
+            _renderFlipService.Value.Flip(entity, direction);
+
+            _moveUnitFilter.Pools.Inc3.Get(entity).ToTheLeft = direction;
 
             _animationService.Value.StartAnimation(
                 entity, Configs.AnimationTrack.walk, true,
                 Identifiers.UnitAnimationSpeed);
-
         }
 
         private EcsCustomInject<RendererFlipService> _renderFlipService = default;
         private EcsCustomInject<ControlAnimationService> _animationService = default;
 
-        private EcsFilterInject<Inc<UnitComponent, MoveCommand>,
+        private EcsFilterInject<Inc<UnitComponent, MoveCommand, UnitDirectionComponent>,
             Exc<JumpCommand>> _moveUnitFilter = default;
     }
 }

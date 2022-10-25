@@ -1,6 +1,7 @@
 ﻿
 using Asserts.Code;
 using Assets.Code.ECS.Components;
+using Assets.Code.ECS.Components.Unit;
 using Assets.Code.Interfaces;
 using Leopotam.EcsLite;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace Assets.Code.Services
 
             _gameObjectPool = _world.GetPool<GameObjectComponent>();
 
+            _unitDirection = _world.GetPool<UnitDirectionComponent>();
+
             _animationService = animationService;
             _objectsPool = objectsPool;
         }
@@ -40,7 +43,11 @@ namespace Assets.Code.Services
             unitAvatar.Entity = unitEntity;
 
             MovingInit(unit, unitAvatar, unitEntity, ref position);
-            AnimationInit(unit, unitAvatar, unitEntity);
+            bool unitOrientationToTheLeft = false;
+            AnimationInit(unit, unitAvatar, unitEntity, ref unitOrientationToTheLeft);
+
+            SetUnitOrientation(unitEntity, unitOrientationToTheLeft);
+
             SoundInit(unit, unitEntity);
             AttackFacilitiesInit(unit, unitAvatar, unitEntity);
             HealthInit(unitAvatar, unitEntity);
@@ -52,6 +59,12 @@ namespace Assets.Code.Services
                 Identifiers.UnitAnimationSpeed);
 
             return unitEntity;
+        }
+
+        private void SetUnitOrientation(int unitEntity, bool unitOrientationToTheLeft)
+        {
+            ref var unitDirection = ref _unitDirection.Add(unitEntity);
+            unitDirection.ToTheLeft = unitOrientationToTheLeft;
         }
 
         private void MovingInit(
@@ -71,7 +84,7 @@ namespace Assets.Code.Services
         }
 
         private void AnimationInit(
-            GameObject unitGameObject, UnitAvatar avatar, int unitEntity)
+            GameObject unitGameObject, UnitAvatar avatar, int unitEntity, ref bool toTheLeft)
         {
             ref var unitAnimation = ref _unitAnimationPool.Add(unitEntity);
 
@@ -79,6 +92,8 @@ namespace Assets.Code.Services
                 unitGameObject.GetComponent<SpriteRenderer>();
 
             unitAnimation.AnimationConfig = avatar.AnimationConfig;
+
+            toTheLeft = unitAnimation.SpriteRenderer.flipX; 
         }
 
         private void SoundInit(GameObject unitGameObject, int unitEntity)
@@ -95,6 +110,9 @@ namespace Assets.Code.Services
 
             unitAtack.Attak =
                 unitGameObject.GetComponent<UnitAttack>();
+
+            unitAtack.Attak.LayerMask = 
+                GameLayers.GetTargetMaskByLayer(unitGameObject.layer);
         }
 
         private void HealthInit(UnitAvatar avatar, int unitEntity)
@@ -121,7 +139,10 @@ namespace Assets.Code.Services
 
         private EcsPool<GameObjectComponent> _gameObjectPool = default;
 
+        private EcsPool<UnitDirectionComponent> _unitDirection = default;
+
         private IControlAnimationService _animationService = default;
         private IVariousObjectsPool _objectsPool = default;
+        
     }
 }

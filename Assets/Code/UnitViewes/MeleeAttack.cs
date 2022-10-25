@@ -1,27 +1,26 @@
-﻿using Asserts.Code;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Code.Units
 {
     public sealed class MeleeAttack : UnitAttack
     {
         [SerializeField]
-        private float _attackDistance = 1.0f;
+        public float AttackDistance = 1.0f;
 
         [SerializeField]
-        Vector2 _attackRayPosition;
+        public Vector2 AttackRayPosition;
 
         [SerializeField]
-        private float _attackDamage;
+        public float AttackDamage;
 
 
-        public override int Attack()
+        public override int Attack(bool toTheLeft)
         {
             var hit = Physics2D.Raycast(
                 new Vector2(gameObject.transform.position.x,
-                gameObject.transform.position.y + 1f) + _attackRayPosition, 
-                Vector2.right, _attackDistance, GameLayers.EnemyLayerMask);
+                gameObject.transform.position.y + 1f) + AttackRayPosition,
+                toTheLeft ? Vector2.left: Vector2.right, 
+                AttackDistance, LayerMask);
 
             if (null != hit.collider 
                 && hit.collider.gameObject.TryGetComponent(out UnitAvatar target))
